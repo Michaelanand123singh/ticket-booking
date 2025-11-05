@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
@@ -9,7 +9,7 @@ import toast from 'react-hot-toast'
 
 export default function RegisterPage() {
   const router = useRouter()
-  const { setUser, setToken } = useAuthStore()
+  const { setUser, setToken, isAuthenticated, user, _hasHydrated } = useAuthStore()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,6 +17,13 @@ export default function RegisterPage() {
     confirmPassword: '',
   })
   const [isLoading, setIsLoading] = useState(false)
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (_hasHydrated && isAuthenticated && user) {
+      router.push(user.role === 'ADMIN' ? '/admin' : '/dashboard')
+    }
+  }, [isAuthenticated, user, _hasHydrated, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

@@ -50,7 +50,14 @@ export default function TicketPurchase({ ticket }: TicketPurchaseProps) {
 
       if (response.ok) {
         toast.success('Order created successfully!')
-        router.push(`/checkout/${data.orderId}`)
+        // Use data.id (the order ID from the response)
+        const orderId = data.id || data.orderId
+        if (orderId) {
+          router.push(`/checkout/${orderId}`)
+        } else {
+          toast.error('Order created but ID not found')
+          console.error('Order response:', data)
+        }
       } else {
         toast.error(data.message || 'Failed to create order')
       }

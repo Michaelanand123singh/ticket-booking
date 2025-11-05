@@ -22,10 +22,23 @@ export async function GET(request: NextRequest) {
           include: {
             ticket: {
               select: {
+                id: true,
                 title: true,
+                description: true,
                 image: true,
+                venue: true,
+                date: true,
+                time: true,
+                category: true,
               },
             },
+          },
+        },
+        payment: {
+          select: {
+            transactionId: true,
+            status: true,
+            createdAt: true,
           },
         },
       },

@@ -4,25 +4,23 @@ import type { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Protected routes - actual authentication will be handled in the pages/components
-  // Middleware is kept simple for Edge runtime compatibility
-  const protectedRoutes = ['/dashboard', '/admin']
-  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route))
-
-  if (isProtectedRoute) {
-    // Check for token in cookies or headers
-    const token = request.cookies.get('token')?.value || 
-                  request.headers.get('authorization')?.replace('Bearer ', '')
-
-    if (!token) {
-      return NextResponse.redirect(new URL('/login', request.url))
-    }
+  // Don't redirect login/register pages
+  if (pathname === '/login' || pathname === '/register') {
+    return NextResponse.next()
   }
 
+  // Protected routes - actual authentication will be handled in the pages/components
+  // Middleware is kept simple for Edge runtime compatibility - we'll let the pages handle auth
+  // This prevents infinite redirects while still allowing pages to check auth properly
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/admin/:path*'],
+  matcher: [
+    '/dashboard/:path*',
+    '/admin/:path*',
+    '/my-tickets/:path*',
+    '/checkout/:path*',
+  ],
 }
 

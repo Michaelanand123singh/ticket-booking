@@ -60,6 +60,12 @@ export default function Header() {
                   </Link>
                 )}
                 <Link
+                  href="/my-tickets"
+                  className="text-gray-700 hover:text-indigo-600 transition-colors"
+                >
+                  My Tickets
+                </Link>
+                <Link
                   href="/dashboard"
                   className="flex items-center space-x-2 text-gray-700 hover:text-indigo-600 transition-colors"
                 >
@@ -130,6 +136,13 @@ export default function Header() {
                       Admin
                     </Link>
                   )}
+                  <Link
+                    href="/my-tickets"
+                    className="text-gray-700"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    My Tickets
+                  </Link>
                   <Link
                     href="/dashboard"
                     className="text-gray-700"

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
@@ -9,12 +9,19 @@ import toast from 'react-hot-toast'
 
 export default function LoginPage() {
   const router = useRouter()
-  const { setUser, setToken } = useAuthStore()
+  const { setUser, setToken, isAuthenticated, user, _hasHydrated } = useAuthStore()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
   const [isLoading, setIsLoading] = useState(false)
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (_hasHydrated && isAuthenticated && user) {
+      router.push(user.role === 'ADMIN' ? '/admin' : '/dashboard')
+    }
+  }, [isAuthenticated, user, _hasHydrated, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -30,8 +37,8 @@ export default function LoginPage() {
       const data = await response.json()
 
       if (response.ok) {
-        setUser(data.user)
         setToken(data.token)
+        setUser(data.user)
         toast.success('Login successful!')
         router.push(data.user.role === 'ADMIN' ? '/admin' : '/dashboard')
       } else {

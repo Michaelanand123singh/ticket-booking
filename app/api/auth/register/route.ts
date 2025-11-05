@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { hashPassword, generateToken } from '@/lib/auth'
 import { sendEmail, generateOTPEmail } from '@/lib/email'
+import { setCache } from '@/lib/redis'
 
 export async function POST(request: NextRequest) {
   try {
@@ -42,8 +43,8 @@ export async function POST(request: NextRequest) {
     // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
 
-    // Store OTP in Redis (you can implement this)
-    // For now, we'll just send the email
+    // Store OTP in Redis (expires in 10 minutes)
+    await setCache(`email-verification:${email}`, otp, 600)
 
     // Send verification email
     await sendEmail({

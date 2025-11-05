@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
+import { useAuthCheck } from '@/hooks/useAuthCheck'
 import { formatPrice } from '@/lib/utils'
 import { FiCreditCard, FiCheckCircle } from 'react-icons/fi'
 import toast from 'react-hot-toast'
@@ -22,23 +23,41 @@ interface Order {
 export default function CheckoutPage() {
   const router = useRouter()
   const params = useParams()
-  const { isAuthenticated, token } = useAuthStore()
+  const { token } = useAuthStore()
+  const { isChecking } = useAuthCheck()
   const [order, setOrder] = useState<Order | null>(null)
   const [loading, setLoading] = useState(true)
   const [processing, setProcessing] = useState(false)
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/login')
+    if (isChecking || !token) {
       return
     }
 
-    fetchOrder()
-  }, [isAuthenticated, router])
+    // Wait for params to be available
+    if (!params || !params.orderId) {
+      return
+    }
 
-  const fetchOrder = async () => {
+    const orderId = params.orderId as string
+    if (!orderId || orderId === 'undefined' || orderId === 'null') {
+      toast.error('Invalid order ID')
+      router.push('/dashboard')
+      return
+    }
+
+    fetchOrder(orderId)
+  }, [isChecking, router, params, token])
+
+  const fetchOrder = async (orderId: string) => {
+    if (!orderId || orderId === 'undefined') {
+      toast.error('Invalid order ID')
+      router.push('/dashboard')
+      return
+    }
+
     try {
-      const response = await fetch(`/api/orders/${params.orderId}`, {
+      const response = await fetch(`/api/orders/${orderId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -83,8 +102,8 @@ export default function CheckoutPage() {
       const data = await response.json()
 
       if (response.ok) {
-        toast.success('Payment successful!')
-        router.push(`/dashboard/orders/${order.id}`)
+        toast.success('Payment successful! Your tickets have been booked.')
+        router.push('/my-tickets')
       } else {
         toast.error(data.message || 'Payment failed')
       }

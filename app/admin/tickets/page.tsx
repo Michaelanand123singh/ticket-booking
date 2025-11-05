@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
+import { useAuthCheck } from '@/hooks/useAuthCheck'
 import { FiPlus, FiEdit, FiTrash2, FiEye } from 'react-icons/fi'
 import { formatPrice, formatDate } from '@/lib/utils'
 import toast from 'react-hot-toast'
@@ -24,18 +25,16 @@ interface Ticket {
 
 export default function AdminTicketsPage() {
   const router = useRouter()
-  const { user, isAuthenticated, token } = useAuthStore()
+  const { user, token } = useAuthStore()
+  const { isChecking } = useAuthCheck('/login', true)
   const [tickets, setTickets] = useState<Ticket[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!isAuthenticated || user?.role !== 'ADMIN') {
-      router.push('/dashboard')
-      return
+    if (!isChecking && token) {
+      fetchTickets()
     }
-
-    fetchTickets()
-  }, [isAuthenticated, user, router])
+  }, [isChecking, token])
 
   const fetchTickets = async () => {
     try {
@@ -80,8 +79,12 @@ export default function AdminTicketsPage() {
     }
   }
 
-  if (!isAuthenticated || user?.role !== 'ADMIN') {
-    return null
+  if (isChecking || !user || user.role !== 'ADMIN') {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    )
   }
 
   return (

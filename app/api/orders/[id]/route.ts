@@ -8,6 +8,15 @@ export async function GET(
 ) {
   try {
     const { id } = await params
+    
+    // Validate order ID
+    if (!id || id === 'undefined') {
+      return NextResponse.json(
+        { message: 'Invalid order ID' },
+        { status: 400 }
+      )
+    }
+    
     const token = request.headers.get('authorization')?.replace('Bearer ', '')
 
     if (!token) {

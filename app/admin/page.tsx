@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
+import { useAuthCheck } from '@/hooks/useAuthCheck'
 import { FiUsers, FiDollarSign, FiPackage, FiTrendingUp } from 'react-icons/fi'
 import { formatPrice } from '@/lib/utils'
 import toast from 'react-hot-toast'
@@ -17,7 +18,8 @@ interface Stats {
 
 export default function AdminDashboard() {
   const router = useRouter()
-  const { user, isAuthenticated, token } = useAuthStore()
+  const { user, token } = useAuthStore()
+  const { isChecking } = useAuthCheck('/login', true)
   const [stats, setStats] = useState<Stats>({
     totalUsers: 0,
     totalRevenue: 0,
@@ -28,13 +30,10 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!isAuthenticated || user?.role !== 'ADMIN') {
-      router.push('/dashboard')
-      return
+    if (!isChecking && token) {
+      fetchStats()
     }
-
-    fetchStats()
-  }, [isAuthenticated, user, router])
+  }, [isChecking, token])
 
   const fetchStats = async () => {
     try {
@@ -57,8 +56,12 @@ export default function AdminDashboard() {
     }
   }
 
-  if (!isAuthenticated || user?.role !== 'ADMIN') {
-    return null
+  if (isChecking || !user || user.role !== 'ADMIN') {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    )
   }
 
   return (
