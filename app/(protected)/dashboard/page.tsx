@@ -223,13 +223,6 @@ export default function DashboardPage() {
             <p className="text-gray-600 text-sm">View all your booked tickets</p>
           </Link>
           <Link
-            href="/dashboard/transactions"
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-          >
-            <h3 className="text-lg font-semibold mb-2">Transaction History</h3>
-            <p className="text-gray-600 text-sm">View all your payment transactions</p>
-          </Link>
-          <Link
             href="/dashboard/profile"
             className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >

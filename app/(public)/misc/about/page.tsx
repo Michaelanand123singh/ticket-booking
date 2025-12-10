@@ -108,7 +108,7 @@ export default function AboutPage() {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-3">Security</h3>
             <p className="text-gray-600">
-              Your data and payments are protected with industry-standard security
+              Your data is protected with industry-standard security
               measures.
             </p>
           </div>

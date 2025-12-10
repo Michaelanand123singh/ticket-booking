@@ -36,7 +36,6 @@ export async function GET(
             ticket: true,
           },
         },
-        payment: true,
       },
     })
 

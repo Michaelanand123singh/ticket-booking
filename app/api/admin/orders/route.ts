@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { verifyToken } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '')
@@ -41,17 +43,30 @@ export async function GET(request: NextRequest) {
             },
           },
         },
-        payment: {
-          select: {
-            transactionId: true,
-            status: true,
-          },
-        },
       },
       orderBy: { createdAt: 'desc' },
     })
 
-    return NextResponse.json(orders)
+    // Define types manually
+    interface OrderWithDetails {
+      id: string
+      userId: string
+      totalAmount: number
+      status: string
+      createdAt: Date
+      updatedAt: Date
+      user: {
+        name: string
+        email: string
+      }
+      orderItems: {
+        ticket: {
+          title: string
+        }
+      }[]
+    }
+
+    return NextResponse.json(orders as unknown as OrderWithDetails[])
   } catch (error) {
     console.error('Admin orders fetch error:', error)
     return NextResponse.json(

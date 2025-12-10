@@ -27,11 +27,6 @@ interface Order {
     quantity: number
     price: number
   }>
-  payment?: {
-    transactionId: string
-    status: string
-    createdAt: string
-  }
 }
 
 export default function OrderDetailPage() {
@@ -222,14 +217,6 @@ export default function OrderDetailPage() {
                 <p className="text-sm text-gray-600 mb-1">Order Date</p>
                 <p className="font-semibold">{formatDateTime(order.createdAt)}</p>
               </div>
-              {order.payment && (
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Transaction ID</p>
-                  <p className="font-semibold font-mono text-sm">
-                    {order.payment.transactionId}
-                  </p>
-                </div>
-              )}
             </div>
           </div>
 

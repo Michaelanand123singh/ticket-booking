@@ -4,7 +4,6 @@
 export type UserRole = 'USER' | 'ADMIN'
 export type TicketCategory = 'SPORTS' | 'CONCERT'
 export type OrderStatus = 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED'
-export type PaymentStatus = 'PENDING' | 'COMPLETED' | 'FAILED' | 'REFUNDED'
 
 export interface User {
   id: string
@@ -53,15 +52,4 @@ export interface OrderItem {
   createdAt: Date
 }
 
-export interface Payment {
-  id: string
-  orderId: string
-  amount: number
-  paymentMethod: string
-  status: PaymentStatus
-  transactionId: string | null
-  stripePaymentId: string | null
-  createdAt: Date
-  updatedAt: Date
-}
 

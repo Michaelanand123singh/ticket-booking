@@ -62,7 +62,6 @@ model Order {
   totalAmount   Float
   status        OrderStatus @default(PENDING)
   orderItems    OrderItem[]
-  payment       Payment?
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   
@@ -89,24 +88,3 @@ model OrderItem {
   @@map("order_items")
 }
 
-model Payment {
-  id            String        @id @default(auto()) @map("_id") @db.ObjectId
-  orderId       String        @unique @db.ObjectId
-  order         Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  amount        Float
-  paymentMethod String
-  status        PaymentStatus @default(PENDING)
-  transactionId String?       @unique
-  stripePaymentId String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  
-  @@map("payments")
-}
-
-enum PaymentStatus {
-  PENDING
-  COMPLETED
-  FAILED
-  REFUNDED
-}

@@ -34,13 +34,6 @@ export async function GET(request: NextRequest) {
             },
           },
         },
-        payment: {
-          select: {
-            transactionId: true,
-            status: true,
-            createdAt: true,
-          },
-        },
       },
       orderBy: { createdAt: 'desc' },
     })

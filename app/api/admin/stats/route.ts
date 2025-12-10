@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { verifyToken } from '@/lib/auth'
-import type { Order, Payment } from '@/types/prisma'
-
-type OrderWithPayment = Order & {
-  payment: Payment | null
-}
+import type { Order } from '@/types/prisma'
 
 export async function GET(request: NextRequest) {
   try {
@@ -23,11 +19,7 @@ export async function GET(request: NextRequest) {
     const [totalUsers, totalTickets, orders, recentOrders] = await Promise.all([
       prisma.user.count(),
       prisma.ticket.count(),
-      prisma.order.findMany({
-        include: {
-          payment: true,
-        },
-      }),
+      prisma.order.findMany(),
       prisma.order.findMany({
         take: 10,
         orderBy: { createdAt: 'desc' },
@@ -44,8 +36,8 @@ export async function GET(request: NextRequest) {
 
     const totalOrders = orders.length
     const totalRevenue = orders
-      .filter((order: OrderWithPayment) => order.payment?.status === 'COMPLETED')
-      .reduce((sum: number, order: OrderWithPayment) => sum + order.totalAmount, 0)
+      .filter((order: Order) => order.status === 'COMPLETED' || order.status === 'CONFIRMED')
+      .reduce((sum: number, order: Order) => sum + order.totalAmount, 0)
 
     return NextResponse.json({
       totalUsers,

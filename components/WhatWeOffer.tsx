@@ -7,7 +7,7 @@ const offers = [
     },
     {
         title: 'Secure Booking',
-        description: 'Experience 100% secure transactions with our encrypted payment gateway.',
+        description: 'Experience 100% secure booking with instant ticket confirmation.',
     },
     {
         title: 'Instant Delivery',
