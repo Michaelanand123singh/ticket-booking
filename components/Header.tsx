@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
 import { FiUser, FiLogOut, FiMenu, FiX } from 'react-icons/fi'
-import { Trophy, Music, Calendar, Newspaper, Briefcase, FileText, Mic, Activity } from 'lucide-react'
+import { Trophy, Music, Calendar, Newspaper, Briefcase, FileText, Mic, Activity, Home } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import {
   NavigationMenu,
@@ -29,10 +29,11 @@ const navItems = [
   {
     title: "Sports",
     items: [
-      { title: "Football", href: "#", icon: Trophy, description: "Latest football matches and news." },
-      { title: "Basketball", href: "#", icon: Activity, description: "NBA and local basketball events." },
-      { title: "Tennis", href: "#", icon: Trophy, description: "Grand Slam and ATP tournaments." },
-      { title: "Cricket", href: "#", icon: Activity, description: "International and league cricket." },
+      { title: "Football", href: "/experiences/football", icon: Trophy, description: "Latest football matches and news." },
+      { title: "Basketball", href: "/experiences/basketball", icon: Activity, description: "NBA and local basketball events." },
+      { title: "Tennis", href: "/experiences/tennis", icon: Trophy, description: "Grand Slam and ATP tournaments." },
+      { title: "Cricket", href: "/experiences/cricket", icon: Activity, description: "International and league cricket." },
+      { title: "Rugby", href: "/experiences/rugby", icon: Activity, description: "Intensity and passion on the field." },
     ]
   },
   {
@@ -42,14 +43,6 @@ const navItems = [
       { title: "Festivals", href: "#", icon: Calendar, description: "Cultural and music festivals." },
       { title: "Workshops", href: "#", icon: Briefcase, description: "Skill-building sessions." },
       { title: "Conferences", href: "#", icon: Mic, description: "Professional gatherings." },
-    ]
-  },
-  {
-    title: "Event Organiser",
-    items: [
-      { title: "Create Event", href: "#", icon: Calendar, description: "Host your own event." },
-      { title: "Manage Events", href: "#", icon: Briefcase, description: "Track attendees and sales." },
-      { title: "Analytics", href: "#", icon: FileText, description: "Insights and performance metrics." },
     ]
   },
   {
@@ -93,6 +86,19 @@ export default function Header() {
           <div className="hidden md:flex">
             <NavigationMenu>
               <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild className={cn(
+                    navigationMenuTriggerStyle(),
+                    "!bg-transparent hover:!bg-transparent focus:!bg-transparent data-[active]:!bg-transparent data-[state=open]:!bg-transparent",
+                    (isScrolled || mobileMenuOpen)
+                      ? "text-black hover:text-black focus:text-black"
+                      : "text-white hover:text-white focus:text-white data-[state=open]:text-white data-[active]:text-white"
+                  )}>
+                    <Link href="/">
+                      Home
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
                 {navItems.map((section) => (
                   <NavigationMenuItem key={section.title}>
                     <NavigationMenuTrigger className={cn(
@@ -203,6 +209,13 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t pt-4 h-[calc(100vh-5rem)] overflow-y-auto">
             <nav className="flex flex-col space-y-4">
+              <Link
+                href="/"
+                className="font-semibold text-gray-900"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
               {navItems.map((section) => (
                 <div key={section.title} className="flex flex-col space-y-2">
                   <span className="font-semibold text-gray-900">{section.title}</span>

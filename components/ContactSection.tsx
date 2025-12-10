@@ -13,12 +13,18 @@ export default function ContactSection() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                     {/* Left Side: Text */}
                     <div className="text-left md:pr-12 pt-2">
-                        <h2 className="text-4xl font-normal mb-6 text-white">Contact Us</h2>
+                        <h2 className="text-xl sm:text-3xl font-normal mb-6 text-white">Contact Us</h2>
                         <p className="text-sm text-white mb-8">
                             Have questions about our events or services? We're here to help!
                             Reach out to our team and we'll get back to you as soon as possible.
                         </p>
-                       
+                        <p className="text-sm text-white mb-2">
+                            Email: support@sportsevents.com
+                        </p>
+                        <p className="text-sm text-white">
+                            Phone: +1 (555) 123-4567
+                        </p>
+
                     </div>
 
                     {/* Right Side: Form */}

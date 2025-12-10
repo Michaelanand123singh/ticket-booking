@@ -4,7 +4,7 @@ export default function Hero() {
     return (
         <div className="relative h-screen w-full">
             <Image
-                src="/header_image.jpg"
+                src="/freepik__35mm-film-photography-legend-player-emerging-from-__53997 1.jpg"
                 alt="Hero Background"
                 fill
                 className="object-cover"
@@ -14,10 +14,10 @@ export default function Hero() {
             <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-background via-background/60 to-transparent z-20" />
             <div className="w-full relative z-10 flex h-full flex-col justify-center items-end max-[375px]:items-center px-6 md:px-12 text-white">
                 <div className="w-auto text-left max-[375px]:text-center">
-                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-medium leading-tight tracking-wide">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-light leading-tight tracking-wide">
                         YOUR NEXT <br />
                         SPORTS <br />
-                        <span className="font-extrabold">ADVENTURE</span> <br />
+                        <span className="font-extrabold text-blue-600">ADVENTURE</span> <br />
                         STARTS <br />
                         HERE
                     </h1>

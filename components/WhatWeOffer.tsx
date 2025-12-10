@@ -31,7 +31,7 @@ export default function WhatWeOffer() {
     return (
         <section className="py-16 bg-background text-foreground">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-normal text-left mb-12">What we <span className="text-blue-900">offer</span></h2>
+                <h2 className="text-xl sm:text-3xl font-normal text-left mb-12">What we <span className="text-blue-900">offer</span></h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                     {offers.map((offer, index) => (
                         <div key={index} className="p-6 rounded-lg bg-white text-black">
