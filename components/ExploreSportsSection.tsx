@@ -88,8 +88,8 @@ const sportsItems = [
 
 export default function ExploreSportsSection() {
     return (
-        <section className="pt-20 pb-0 bg-background">
-            <div className="container mx-auto px-4">
+        <section className="pt-20 pb-0 bg-background relative">
+            <div className="container mx-auto px-4 relative z-20">
                 <h2 className="text-left text-white font-light text-xl sm:text-3xl mb-2 pl-8 md:pl-16 flex flex-wrap items-center justify-start gap-4">
                     <span>Explore <span className="font-semibold text-blue-600">Sports</span></span>
                     <span className="font-thin text-white/50 tracking-tighter">&mdash;&mdash;&mdash;</span>

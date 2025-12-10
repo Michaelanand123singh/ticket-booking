@@ -24,8 +24,8 @@ const newsData = [
 
 export default function NewsSection() {
     return (
-        <section className="py-24 bg-gray-200 w-full">
-            <div className="container mx-auto px-4">
+        <section className="py-24 bg-gray-200 w-full relative z-20">
+            <div className="container mx-auto px-4 relative z-20">
                 <h2 className="text-xl sm:text-3xl font-normal text-black mb-8">News</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {newsData.map((news, index) => (

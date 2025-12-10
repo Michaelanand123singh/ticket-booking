@@ -84,12 +84,14 @@ export const HeroSection = React.forwardRef<HTMLDivElement, HeroProps>(
                         rotateY(${(pos) * -10}deg)
                       `,
                       zIndex: isCenter ? 10 : isAdjacent ? 5 : 1,
-                      opacity: isCenter ? 1 : isAdjacent ? 0.4 : 0,
+                      opacity: isCenter ? 1 : isAdjacent ? 1 : 0,
                       filter: 'blur(0px)',
                       visibility: Math.abs(pos) > 1 ? 'hidden' : 'visible',
                     }}
                   >
-                    <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-foreground/10 shadow-2xl">
+                    <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-foreground/10 shadow-2xl bg-background">
+                      {/* Dark overlay for inactive cards to simulate focus/depth without transparency */}
+                      {!isCenter && <div className="absolute inset-0 bg-black/60 z-50" />}
                       <img
                         src={image.src}
                         alt={image.title}
