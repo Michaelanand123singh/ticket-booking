@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { verifyToken } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '')
@@ -32,7 +34,20 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: 'desc' },
     })
 
-    return NextResponse.json(users)
+    // Define types manually
+    interface UserWithCount {
+      id: string
+      name: string
+      email: string
+      role: string
+      emailVerified: boolean
+      createdAt: Date
+      _count: {
+        orders: number
+      }
+    }
+
+    return NextResponse.json(users as unknown as UserWithCount[])
   } catch (error) {
     console.error('Admin users fetch error:', error)
     return NextResponse.json(

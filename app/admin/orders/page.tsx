@@ -25,10 +25,6 @@ interface Order {
     quantity: number
     price: number
   }>
-  payment?: {
-    transactionId: string
-    status: string
-  }
 }
 
 export default function AdminOrdersPage() {

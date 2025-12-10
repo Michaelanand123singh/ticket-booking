@@ -12,9 +12,7 @@ A comprehensive full-stack ticket booking platform built with Next.js, MongoDB, 
   - Profile management
   - Order history
   - Ticket purchase interface
-  - Payment processing
   - Download/View purchased tickets
-  - Transaction history
 - **Authentication System**: 
   - User registration and login
   - Secure JWT authentication
@@ -31,11 +29,9 @@ A comprehensive full-stack ticket booking platform built with Next.js, MongoDB, 
   - Category management
   - Image uploads via Cloudinary
 - **Order Management**: View all purchases, order status updates, export reports
-- **Payment Management**: Payment tracking, transaction records, revenue reports
 - **User Management**: View registered users, account management
 
 ### Additional Features
-- ✅ Secure payment gateway integration (Stripe ready)
 - ✅ Email notifications (Order confirmation, Tickets, OTP)
 - ✅ Mobile-responsive design
 - ✅ Fast loading speeds with Redis caching
@@ -52,7 +48,6 @@ A comprehensive full-stack ticket booking platform built with Next.js, MongoDB, 
 - **State Management**: Zustand
 - **Caching**: Redis
 - **Image Storage**: Cloudinary
-- **Payment**: Stripe (ready for integration)
 - **Authentication**: JWT + Firebase
 - **Email**: Nodemailer
 - **UI Components**: React Icons, React Hot Toast
@@ -98,11 +93,6 @@ A comprehensive full-stack ticket booking platform built with Next.js, MongoDB, 
    CLOUDINARY_API_KEY="your-api-key"
    CLOUDINARY_API_SECRET="your-api-secret"
    
-   # Stripe
-   STRIPE_SECRET_KEY="sk_test_your_stripe_secret_key"
-   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_your_stripe_publishable_key"
-   STRIPE_WEBHOOK_SECRET="whsec_your_webhook_secret"
-   
    # Redis
    REDIS_URL="redis://localhost:6379"
    
@@ -138,7 +128,6 @@ The application uses MongoDB with Prisma ORM. Key models include:
 - **Ticket**: Event tickets with categories (SPORTS/CONCERT)
 - **Order**: User orders with status tracking
 - **OrderItem**: Individual items in an order
-- **Payment**: Payment records and transaction history
 
 ## 🔐 Authentication
 
@@ -147,14 +136,6 @@ The application uses JWT tokens for authentication. Users can:
 - Login with email/password
 - Use Google OAuth (Firebase)
 - Password recovery via email
-
-## 💳 Payment Integration
-
-The payment system is ready for Stripe integration. Currently uses a demo payment flow. To integrate Stripe:
-
-1. Add your Stripe keys to `.env`
-2. Update `/app/api/payments/route.ts` with Stripe SDK calls
-3. Implement webhook handlers for payment confirmations
 
 ## 📧 Email Notifications
 
@@ -195,7 +176,6 @@ ticket/
 - MongoDB database (MongoDB Atlas recommended)
 - Redis instance (for caching)
 - Cloudinary account (for image storage)
-- Stripe account (for payments)
 - SMTP server (for emails)
 
 ### Build for Production
@@ -222,9 +202,6 @@ npm start
 - `GET /api/orders/[id]` - Get order details
 - `GET /api/orders/stats` - Get user order statistics
 
-### Payments
-- `POST /api/payments` - Process payment
-
 ### Admin
 - `GET /api/admin/stats` - Get admin statistics
 
@@ -247,7 +224,6 @@ For support, email support@tickethub.com or create an issue in the repository.
 
 ## 🎯 Roadmap
 
-- [ ] Complete Stripe payment integration
 - [ ] Add Firebase Google OAuth
 - [ ] Implement ticket download/PDF generation
 - [ ] Add advanced search and filters

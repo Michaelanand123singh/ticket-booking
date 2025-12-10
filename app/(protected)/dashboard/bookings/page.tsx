@@ -33,7 +33,6 @@ interface BookedTicket {
   orderDate: string
   totalAmount: number
   status: string
-  transactionId?: string
   ticket: TicketItem
   quantity: number
   price: number
@@ -76,7 +75,6 @@ export default function MyTicketsPage() {
                 orderDate: order.createdAt,
                 totalAmount: order.totalAmount,
                 status: order.status,
-                transactionId: order.payment?.transactionId,
                 ticket: item.ticket,
                 quantity: item.quantity,
                 price: item.price,
@@ -252,11 +250,6 @@ export default function MyTicketsPage() {
                         <p className="text-xs text-gray-500 mb-2">
                           Order #{ticket.orderId.slice(-8)} • {formatDate(ticket.orderDate)}
                         </p>
-                        {ticket.transactionId && (
-                          <p className="text-xs text-gray-500 font-mono">
-                            Txn: {ticket.transactionId.slice(-12)}
-                          </p>
-                        )}
                       </div>
 
                       {/* Actions */}
