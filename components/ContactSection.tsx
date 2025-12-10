@@ -14,15 +14,11 @@ export default function ContactSection() {
                     {/* Left Side: Text */}
                     <div className="text-left md:pr-12 pt-2">
                         <h2 className="text-4xl font-normal mb-6 text-white">Contact Us</h2>
-                        <p className="text-lg text-white mb-8">
+                        <p className="text-sm text-white mb-8">
                             Have questions about our events or services? We're here to help!
                             Reach out to our team and we'll get back to you as soon as possible.
                         </p>
-                        <div className="space-y-4 text-white">
-                            <p>123 Event Street, Cityville, ST 12345</p>
-                            <p>support@tickethub.com</p>
-                            <p>+1 (555) 123-4567</p>
-                        </div>
+                       
                     </div>
 
                     {/* Right Side: Form */}

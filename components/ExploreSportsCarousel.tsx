@@ -111,7 +111,7 @@ const Gallery4 = ({
                 className="max-w-[280px] pl-[20px] lg:max-w-[320px]"
               >
                 <a href={item.href} className="group rounded-md block">
-                  <div className="group relative h-full min-h-[20rem] max-w-full overflow-hidden rounded-md aspect-[9/16]">
+                  <div className="group relative h-full min-h-[20rem] max-w-full overflow-hidden rounded-md aspect-[3/4]">
                     <img
                       src={item.image}
                       alt={item.title}
