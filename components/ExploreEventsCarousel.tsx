@@ -3,12 +3,13 @@ import React, { ReactNode } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 // --- TYPES ---
 interface HeroProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   title: ReactNode;
   subtitle: string;
-  images: { src: string; title: string; subtitle: string; }[];
+  images: { id: string; src: string; title: string; subtitle: string; }[];
 }
 
 // --- HERO SECTION COMPONENT ---
@@ -89,19 +90,21 @@ export const HeroSection = React.forwardRef<HTMLDivElement, HeroProps>(
                       visibility: Math.abs(pos) > 1 ? 'hidden' : 'visible',
                     }}
                   >
-                    <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-foreground/10 shadow-2xl bg-background">
-                      {/* Dark overlay for inactive cards to simulate focus/depth without transparency */}
-                      {!isCenter && <div className="absolute inset-0 bg-black/60 z-50" />}
-                      <img
-                        src={image.src}
-                        alt={image.title}
-                        className="object-cover w-full h-full"
-                      />
-                      <div className="absolute bottom-0 left-0 p-4 md:p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent w-full">
-                        <h3 className="text-white text-xl sm:text-2xl md:text-4xl font-light text-left leading-tight">{image.title}</h3>
-                        <p className="text-white/90 text-sm sm:text-base md:text-2xl font-light text-left mt-1 md:mt-2">{image.subtitle}</p>
+                    <Link href={`/events/${image.id}`} className="block w-full h-full">
+                      <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-foreground/10 shadow-2xl bg-background">
+                        {/* Dark overlay for inactive cards to simulate focus/depth without transparency */}
+                        {!isCenter && <div className="absolute inset-0 bg-black/60 z-50" />}
+                        <img
+                          src={image.src}
+                          alt={image.title}
+                          className="object-cover w-full h-full"
+                        />
+                        <div className="absolute bottom-0 left-0 p-4 md:p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent w-full">
+                          <h3 className="text-white text-xl sm:text-2xl md:text-4xl font-light text-left leading-tight">{image.title}</h3>
+                          <p className="text-white/90 text-sm sm:text-base md:text-2xl font-light text-left mt-1 md:mt-2">{image.subtitle}</p>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 );
               })}

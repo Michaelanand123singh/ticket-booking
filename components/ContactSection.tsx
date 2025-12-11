@@ -9,7 +9,7 @@ export default function ContactSection() {
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
             </div>
 
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 relative z-50">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                     {/* Left Side: Text */}
                     <div className="text-left md:pr-12 pt-2">

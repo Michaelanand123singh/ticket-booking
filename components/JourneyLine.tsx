@@ -11,6 +11,8 @@ export default function JourneyLine() {
 
     // Update dimensions on mount and resize
     useEffect(() => {
+        let timeoutId: NodeJS.Timeout
+
         const updateDimensions = () => {
             if (containerRef.current && containerRef.current.parentElement) {
                 const height = containerRef.current.parentElement.scrollHeight
@@ -20,14 +22,20 @@ export default function JourneyLine() {
             }
         }
 
+        const debouncedUpdateDimensions = () => {
+            clearTimeout(timeoutId)
+            timeoutId = setTimeout(updateDimensions, 100)
+        }
+
         updateDimensions()
-        window.addEventListener('resize', updateDimensions)
+        window.addEventListener('resize', debouncedUpdateDimensions)
         // Also update after a short delay to allow content to load
         const timer = setTimeout(updateDimensions, 1000)
 
         return () => {
-            window.removeEventListener('resize', updateDimensions)
+            window.removeEventListener('resize', debouncedUpdateDimensions)
             clearTimeout(timer)
+            clearTimeout(timeoutId)
         }
     }, [])
 

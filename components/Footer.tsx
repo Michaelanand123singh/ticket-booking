@@ -51,7 +51,19 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
+            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+            <div className="space-y-4 text-gray-400 mb-6">
+              <p>
+                <span className="block text-white font-medium mb-1">Address:</span>
+                123 Sports Avenue, Stadium District,<br />
+                New York, NY 10001
+              </p>
+              <p>
+                <span className="block text-white font-medium mb-1">Phone:</span>
+                +1 (555) 123-4567
+              </p>
+            </div>
+
             <div className="flex space-x-4">
               <a
                 href="#"

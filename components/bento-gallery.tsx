@@ -10,6 +10,7 @@ import {
 import { cn } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import Link from "next/link"
 
 // Defines the structure for each image item in the gallery
@@ -88,10 +89,12 @@ const InteractiveImageBentoGallery: React.FC<
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <Link href={item.href || `/experiences/${item.title.toLowerCase()}`} className="absolute inset-0 z-20" />
-                <img
+                <Image
                   src={item.url}
                   alt={item.title}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500" />
                 <div className="relative z-10 transition-all duration-500">
