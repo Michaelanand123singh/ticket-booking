@@ -1,6 +1,6 @@
 import React from 'react'
 import { ArrowUpDown, Filter } from 'lucide-react'
-import SportHero from '@/components/SportHero'
+import SportHero from '../../../../components/SportHero'
 import SportEventCard from '@/components/SportEventCard'
 
 // Mock data generator based on sport
@@ -22,9 +22,18 @@ const getSportData = (sport: string) => {
         rugby: "https://images.unsplash.com/photo-1519677584237-752f8853252e?auto=format&fit=crop&q=80&w=800",
     }
 
+    const cardImages: Record<string, string> = {
+        football: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=800",
+        basketball: "https://images.unsplash.com/photo-1519861531473-920026393112?auto=format&fit=crop&q=80&w=800",
+        tennis: "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&q=80&w=800",
+        cricket: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=800",
+        rugby: "https://images.unsplash.com/photo-1519677584237-752f8853252e?auto=format&fit=crop&q=80&w=800",
+    }
+
     return {
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
         heroImage: heroImages[sport.toLowerCase()] || heroImages.football,
+        cardImage: cardImages[sport.toLowerCase()] || cardImages.football,
         events: Array(8).fill(null).map((_, i) => ({
             id: i,
             title: "City Lights in New York",
@@ -41,12 +50,13 @@ export default async function SportPage({ params }: { params: Promise<{ sport: s
     const data = getSportData(sport)
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-white">
+        <div className="min-h-screen bg-[#11212D] text-white">
             {/* Hero Section */}
             <SportHero
                 sport={sport}
                 description={data.description}
                 heroImage={data.heroImage}
+                cardImage={data.cardImage}
             />
 
             {/* Content Container */}

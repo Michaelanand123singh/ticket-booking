@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
 import { FiUser, FiLogOut, FiMenu, FiX } from 'react-icons/fi'
@@ -79,67 +80,77 @@ export default function Header() {
       "fixed top-0 w-full z-50 transition-all duration-300",
       (isScrolled || mobileMenuOpen) ? "bg-black/20 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-transparent"
     )}>
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-2">
 
-        <div className="flex items-center justify-end gap-6">
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex">
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild className={cn(
-                    navigationMenuTriggerStyle(),
-                    "!bg-transparent hover:!bg-transparent focus:!bg-transparent data-[active]:!bg-transparent data-[state=open]:!bg-transparent",
-                    "text-white hover:text-white/80 focus:text-white data-[state=open]:text-white data-[active]:text-white"
-                  )}>
-                    <Link href="/">
-                      Home
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                {navItems.map((section) => (
-                  <NavigationMenuItem key={section.title}>
-                    <NavigationMenuTrigger className={cn(
+        <div className="flex items-center justify-between gap-6">
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0">
+            <Image
+              src="/logo.png"
+              alt="Viagosport Logo"
+              width={280}
+              height={120}
+              className="h-20 w-auto object-contain -mt-2 -mb-4"
+              priority
+            />
+          </Link>
+
+          <div className="flex items-center justify-end gap-6 flex-1">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild className={cn(
+                      navigationMenuTriggerStyle(),
                       "!bg-transparent hover:!bg-transparent focus:!bg-transparent data-[active]:!bg-transparent data-[state=open]:!bg-transparent",
                       "text-white hover:text-white/80 focus:text-white data-[state=open]:text-white data-[active]:text-white"
                     )}>
-                      {section.title}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent className="bg-white">
-                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                        {section.items.map((item) => (
-                          <ListItem
-                            key={item.title}
-                            title={item.title}
-                            href={item.href}
-                            icon={item.icon}
-                          >
-                            {item.description}
-                          </ListItem>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
+                      <Link href="/">
+                        Home
+                      </Link>
+                    </NavigationMenuLink>
                   </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
+                  {navItems.map((section) => (
+                    <NavigationMenuItem key={section.title}>
+                      <NavigationMenuTrigger className={cn(
+                        "!bg-transparent hover:!bg-transparent focus:!bg-transparent data-[active]:!bg-transparent data-[state=open]:!bg-transparent",
+                        "text-white hover:text-white/80 focus:text-white data-[state=open]:text-white data-[active]:text-white"
+                      )}>
+                        {section.title}
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent className="bg-white">
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                          {section.items.map((item) => (
+                            <ListItem
+                              key={item.title}
+                              title={item.title}
+                              href={item.href}
+                              icon={item.icon}
+                            >
+                              {item.description}
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
 
-          {/* User Actions - DISABLED */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Login and Signup buttons removed as per request */}
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className={cn(
-              "md:hidden",
-              "text-white"
-            )}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              className={cn(
+                "md:hidden",
+                "text-white"
+              )}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

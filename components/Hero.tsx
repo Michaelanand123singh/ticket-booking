@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import heroImage from '@/public/freepik__35mm-film-photography-legend-player-emerging-from-__53997 1.jpg'
 import { motion } from 'framer-motion'
 import BlurText from './BlurText'
 
@@ -14,11 +15,12 @@ export default function Hero() {
                 transition={{ duration: 6, ease: "easeOut" }}
             >
                 <Image
-                    src="/freepik__35mm-film-photography-legend-player-emerging-from-__53997 1.jpg"
+                    src={heroImage}
                     alt="Hero Background"
                     fill
                     className="object-cover"
                     priority
+                    placeholder="blur"
                 />
             </motion.div>
             <div className="absolute inset-0 bg-black/20" /> {/* Optional overlay for better text contrast if needed later */}
