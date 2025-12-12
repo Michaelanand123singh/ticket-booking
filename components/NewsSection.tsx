@@ -114,11 +114,11 @@ export default function NewsSection() {
 
                 {/* Content Container with Flip Effect */}
                 <div
-                    className={`grid grid-cols-1 lg:grid-cols-3 gap-4 h-[60vh] min-h-[500px] transition-all duration-500 ease-in-out transform ${isFlipping ? 'opacity-0 scale-y-0' : 'opacity-100 scale-y-100'
+                    className={`grid grid-cols-1 lg:grid-cols-3 gap-4 lg:h-[60vh] h-auto transition-all duration-500 ease-in-out transform ${isFlipping ? 'opacity-0 scale-y-0' : 'opacity-100 scale-y-100'
                         }`}
                 >
                     {/* Left Column: Main Card */}
-                    <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col h-full">
+                    <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col h-[450px] lg:h-full">
                         <div className="h-1/2 relative">
                             <img
                                 src={currentData.main.image}
@@ -147,9 +147,9 @@ export default function NewsSection() {
                     </div>
 
                     {/* Middle Column: Stacked Side Cards */}
-                    <div className="flex flex-col gap-3 h-full">
+                    <div className="flex flex-col gap-3 h-auto lg:h-full">
                         {currentData.side.map((item, idx) => (
-                            <div key={item.id} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 flex h-1/3">
+                            <div key={item.id} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 flex h-32 lg:h-1/3">
                                 <div className="w-1/3 relative">
                                     <img
                                         src={item.image}
@@ -170,7 +170,7 @@ export default function NewsSection() {
                     </div>
 
                     {/* Right Column: Highlight Card (Improved Design) */}
-                    <div className="relative rounded-2xl shadow-lg overflow-hidden h-full group">
+                    <div className="relative rounded-2xl shadow-lg overflow-hidden h-[450px] lg:h-full group">
                         {/* Background Image */}
                         <img
                             src={currentData.highlight.image}
