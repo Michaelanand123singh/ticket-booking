@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 
 export default function JourneyLine() {
     const containerRef = useRef<HTMLDivElement>(null)
-    const [svgHeight, setSvgHeight] = useState(2000)
+    const [svgHeight, setSvgHeight] = useState(0)
     const [windowWidth, setWindowWidth] = useState(1000)
     const [windowHeight, setWindowHeight] = useState(800)
 
@@ -14,8 +14,8 @@ export default function JourneyLine() {
         let timeoutId: NodeJS.Timeout
 
         const updateDimensions = () => {
-            if (containerRef.current && containerRef.current.parentElement) {
-                const height = containerRef.current.parentElement.scrollHeight
+            if (containerRef.current) {
+                const height = containerRef.current.offsetHeight
                 setSvgHeight(height)
                 setWindowWidth(window.innerWidth)
                 setWindowHeight(window.innerHeight)
@@ -67,30 +67,42 @@ export default function JourneyLine() {
     // Calculate path points based on window width and height
     const w = windowWidth
     const h = svgHeight
+    const isMobile = w < 768
 
-    // Use windowHeight for the section height to ensure alignment with Hero section
-    const sectionHeight = windowHeight
-    const startOffset = sectionHeight * 0.04
+    // Use svgHeight / 5 for the section height to ensure alignment with content
+    // We divide by 5 because we have 5 distinct segments/sections we want to cover
+    const sectionHeight = svgHeight / 5
+    const startOffset = -100 // Start off-screen (above the top)
+
+    // Adjust horizontal spread based on screen size
+    // Mobile: keep it closer to the edges (0.1 to 0.9 range) to avoid covering center content
+    // Desktop: use full width (0.05 to 0.95 range)
+    const leftX = isMobile ? w * 0.1 : w * 0.05
+    const rightX = isMobile ? w * 0.9 : w * 0.95
+    const centerX = w * 0.5
 
     let d = `M ${w} ${startOffset}`
 
-    d += ` C ${w * 0.9} ${sectionHeight * 0.09}, ${w * 0.5} ${sectionHeight * 0.3}, ${w * 0.17} ${sectionHeight}`
+    // Segment 1: Hero (0 -> 1)
+    // Smooth curve from top-right to bottom-left
+    // Adjusted control points for smoother entry
+    d += ` C ${rightX} ${sectionHeight * 0.2}, ${centerX} ${sectionHeight * 0.4}, ${leftX} ${sectionHeight}`
 
     // Segment 2: Explore Sports (1 -> 2)
     // Curve from Bottom-Left to Bottom-Right
-    d += ` S ${w * 0.5} ${sectionHeight * 1.5}, ${w * 0.9} ${sectionHeight * 2}`
+    d += ` S ${centerX} ${sectionHeight * 1.6}, ${rightX} ${sectionHeight * 2}`
 
     // Segment 3: Explore Events (2 -> 3)
     // Curve from Bottom-Right to Bottom-Left
-    d += ` S ${w * 0.5} ${sectionHeight * 2.5}, ${w * 0.1} ${sectionHeight * 3}`
+    d += ` S ${centerX} ${sectionHeight * 2.6}, ${leftX} ${sectionHeight * 3}`
 
     // Segment 4: What We Offer (3 -> 4)
     // Curve from Bottom-Left to Bottom-Right
-    d += ` S ${w * 0.5} ${sectionHeight * 3.5}, ${w * 0.9} ${sectionHeight * 4}`
+    d += ` S ${centerX} ${sectionHeight * 3.6}, ${rightX} ${sectionHeight * 4}`
 
     // Segment 5: News (4 -> 5)
     // Curve from Bottom-Right to Bottom-Left
-    d += ` S ${w * 0.5} ${sectionHeight * 4.5}, ${w * 0.1} ${sectionHeight * 5}`
+    d += ` S ${centerX} ${sectionHeight * 4.6}, ${leftX} ${sectionHeight * 5}`
 
 
     // Map stroke width to path length so it thickens as it draws the first segment
@@ -105,7 +117,7 @@ export default function JourneyLine() {
         <div
             ref={containerRef}
             className="absolute top-0 left-0 w-full z-15 pointer-events-none overflow-hidden"
-            style={{ height: svgHeight }}
+            style={{ height: '100%' }}
         >
             <svg
                 width="100%"
@@ -114,18 +126,9 @@ export default function JourneyLine() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-full h-full"
+                style={{ filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.5))' }} // CSS filter is much faster than SVG filter
             >
-                {/* Glow Effect Filter */}
                 <defs>
-                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="12" result="blur1" />
-                        <feGaussianBlur stdDeviation="6" result="blur2" />
-                        <feMerge>
-                            <feMergeNode in="blur1" />
-                            <feMergeNode in="blur2" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
                     <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stopColor="#3b82f6" /> {/* Blue-500 */}
                         <stop offset="50%" stopColor="#60a5fa" /> {/* Blue-400 */}
@@ -137,11 +140,10 @@ export default function JourneyLine() {
                 <motion.path
                     d={d}
                     stroke="url(#lineGradient)"
-                    strokeWidth="20"
+                    strokeWidth={isMobile ? "10" : "20"}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     fill="none"
-                    filter="url(#glow)"
                     style={{ pathLength, opacity }} // Link drawing to scroll and opacity
                 />
             </svg>

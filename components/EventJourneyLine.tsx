@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef, useEffect, useState } from 'react'
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring, useMotionValue, animate } from 'framer-motion'
 
 export default function EventJourneyLine() {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -40,11 +40,36 @@ export default function EventJourneyLine() {
         }
     }, [])
 
+    // Initial animation progress (0 -> 0.5)
+    const initialProgress = useMotionValue(0)
+
+    useEffect(() => {
+        // Animate to 50% on mount
+        const animation = animate(initialProgress, 0.5, {
+            duration: 1.5,
+            ease: "easeInOut",
+            delay: 0.2 // Small delay after mount
+        })
+        return () => animation.stop()
+    }, [initialProgress])
+
     // Scroll progress animation
     const { scrollYProgress } = useScroll()
-    const targetPathLength = useTransform(scrollYProgress, [0, 1], [0.7, 1])
 
-    // Smooth out the scroll progress
+    // Map scroll (0-1) to the remaining 50% (0-0.5)
+    const scrollPart = useTransform(scrollYProgress, [0, 1], [0, 0.5])
+
+    // Combine initial animation and scroll
+    const targetPathLength = useTransform(
+        [initialProgress, scrollPart],
+        (latestValues: number[]) => {
+            const latestInitial = latestValues[0] || 0
+            const latestScroll = latestValues[1] || 0
+            return latestInitial + latestScroll
+        }
+    )
+
+    // Smooth out the combined progress
     const pathLength = useSpring(targetPathLength, {
         stiffness: 100,
         damping: 30,
@@ -63,13 +88,6 @@ export default function EventJourneyLine() {
 
     d += ` C ${w * 0.05} ${startY + 100}, ${w * 0.01} ${h}, ${w * 0.83} ${h * 0.4}`
 
-    // d += ` C ${w * 0.1} ${h * 0.6}, ${w * 0.6} ${h * 0.7}, ${w * 0.7} ${h * 0.4}`
-
-    //d += ` S ${w * 1} ${h * 0.1}, ${w * 0.6} ${h * 0.1}`
-
-    // d += ` S ${w * 0.4} ${h * 0.8}, ${w * 0.5} ${h * 0.9}`
-
-    // Always visible once loaded (or animate opacity with pathLength)
     const opacity = useTransform(pathLength, [0, 0.05], [0, 1])
 
     return (

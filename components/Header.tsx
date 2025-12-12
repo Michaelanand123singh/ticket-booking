@@ -153,9 +153,12 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-white/10 pt-4 h-[calc(100vh-5rem)] overflow-y-auto bg-black/90 backdrop-blur-md">
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden w-full border-t border-white/10 bg-black/10 backdrop-blur-xl h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
               <Link
                 href="/"
@@ -179,11 +182,10 @@ export default function Header() {
                   ))}
                 </div>
               ))}
-              {/* Authentication links removed from mobile menu */}
             </nav>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   )
 }
@@ -216,3 +218,4 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+

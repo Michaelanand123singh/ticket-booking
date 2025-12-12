@@ -2,6 +2,7 @@ import React from 'react'
 import { ArrowUpDown, Filter } from 'lucide-react'
 import SportHero from '../../../../components/SportHero'
 import SportEventCard from '@/components/SportEventCard'
+import EventJourneyLine from '@/components/EventJourneyLine'
 
 // Mock data generator based on sport
 const getSportData = (sport: string) => {
@@ -50,7 +51,8 @@ export default async function SportPage({ params }: { params: Promise<{ sport: s
     const data = getSportData(sport)
 
     return (
-        <div className="min-h-screen bg-[#11212D] text-white">
+        <div className="min-h-screen bg-[#11212D] text-white relative">
+            <EventJourneyLine />
             {/* Hero Section */}
             <SportHero
                 sport={sport}

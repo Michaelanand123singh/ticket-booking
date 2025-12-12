@@ -1,4 +1,5 @@
 import React from 'react'
+import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin } from 'react-icons/fi'
 
 export default function ContactSection() {
     return (
@@ -25,6 +26,36 @@ export default function ContactSection() {
                             Phone: +1 (555) 123-4567
                         </p>
 
+                        <div className="flex space-x-4 mt-8">
+                            <a
+                                href="#"
+                                className="text-gray-300 hover:text-white transition-colors"
+                                aria-label="Facebook"
+                            >
+                                <FiFacebook size={24} />
+                            </a>
+                            <a
+                                href="#"
+                                className="text-gray-300 hover:text-white transition-colors"
+                                aria-label="Twitter"
+                            >
+                                <FiTwitter size={24} />
+                            </a>
+                            <a
+                                href="#"
+                                className="text-gray-300 hover:text-white transition-colors"
+                                aria-label="Instagram"
+                            >
+                                <FiInstagram size={24} />
+                            </a>
+                            <a
+                                href="#"
+                                className="text-gray-300 hover:text-white transition-colors"
+                                aria-label="LinkedIn"
+                            >
+                                <FiLinkedin size={24} />
+                            </a>
+                        </div>
                     </div>
 
                     {/* Right Side: Form */}
