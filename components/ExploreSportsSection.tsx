@@ -113,15 +113,15 @@ export default function ExploreSportsSection() {
 
     return (
         <section className="pt-20 pb-0 bg-background relative">
-            <div className="container mx-auto px-4 relative z-20">
-                <div className="flex items-center justify-between mb-2 pl-8 md:pl-16 pr-4">
+            <div className="container mx-auto px-4 min-[425px]:px-12 relative z-20">
+                <div className="flex items-center justify-between mb-2 pl-8 md:pl-16 pr-4 max-w-[1280px] mx-auto">
                     <h2 className="text-left text-white font-light text-xl sm:text-3xl flex flex-wrap items-center justify-start gap-4">
                         <span>Explore <span className="font-semibold text-blue-600">Sports</span></span>
                         <span className="font-thin text-white/50 tracking-tighter">&mdash;&mdash;&mdash;</span>
                     </h2>
                 </div>
 
-                <div className="relative">
+                <div className="relative max-w-[1280px] mx-auto">
                     <Button
                         variant="outline"
                         size="icon"
@@ -146,7 +146,7 @@ export default function ExploreSportsSection() {
                         className="w-full overflow-hidden"
                     >
                         <div
-                            className='relative w-[1280px] h-[700px] transition-transform duration-500 ease-in-out'
+                            className='relative w-[1280px] h-[700px] transition-transform duration-500 ease-in-out mx-auto'
                             style={{ transform: `translateX(-${offset}px)` }}
                         >
                             {/* Football - Tall Vertical */}

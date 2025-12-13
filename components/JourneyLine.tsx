@@ -44,8 +44,8 @@ export default function JourneyLine() {
 
     // Calculate initial progress needed to cover the first screen (Hero)
     // The path has 4.5 segments, and the Hero is the first segment (1.0)
-    // So the progress needed is 1 / 4.5
-    const initialProgress = 1 / 4.5
+    // We want it to load 75% initially
+    const initialProgress = (1 / 4.5) * 0.75
 
     // Scroll progress maps to the remaining part of the path
     const scrollPath = useTransform(scrollYProgress, [0, 1], [0, 1 - initialProgress])
@@ -111,7 +111,15 @@ export default function JourneyLine() {
     // const strokeWidth = useTransform(pathLength, [0, initialProgress, 1], [4, 32, 32])
 
     // Hide the band when pathLength is 0 to prevent the initial "dot" from round linecap
+    // Hide the band when pathLength is 0 to prevent the initial "dot" from round linecap
     const opacity = useTransform(pathLength, [0, 0.01], [0, 1])
+
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) return null
 
     return (
         <div
@@ -126,27 +134,30 @@ export default function JourneyLine() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-full h-full"
-                style={{ filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.5))' }} // CSS filter is much faster than SVG filter
+                style={{ filter: 'none' }}
             >
                 <defs>
-                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#3b82f6" /> {/* Blue-500 */}
-                        <stop offset="50%" stopColor="#60a5fa" /> {/* Blue-400 */}
-                        <stop offset="100%" stopColor="#2563eb" /> {/* Blue-600 */}
+                    <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#3b82f6" />
+                        <stop offset="50%" stopColor="#60a5fa" />
+                        <stop offset="100%" stopColor="#2563eb" />
                     </linearGradient>
                 </defs>
 
-                {/* The Animated Path */}
+                {/* The Cloud Trail (Thick, Blurry Line) */}
                 <motion.path
                     d={d}
-                    stroke="url(#lineGradient)"
-                    strokeWidth={isMobile ? "10" : "20"}
+                    stroke="url(#cloudGradient)"
+                    strokeWidth={isMobile ? "40" : "85"}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     fill="none"
-                    style={{ pathLength, opacity }} // Link drawing to scroll and opacity
+                    className="blur-[20px] opacity-30 mix-blend-screen drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+                    style={{ pathLength }}
                 />
             </svg>
+
+
         </div>
     )
 }

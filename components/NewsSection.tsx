@@ -109,7 +109,7 @@ export default function NewsSection() {
 
     return (
         <section className="py-8 bg-white w-full relative z-20">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 min-[425px]:px-12">
                 <h2 className="text-3xl font-normal text-black mb-4">News</h2>
 
                 {/* Content Container with Flip Effect */}

@@ -40,12 +40,12 @@ export default function EventJourneyLine() {
         }
     }, [])
 
-    // Initial animation progress (0 -> 0.5)
+    // Initial animation progress (0 -> 0.75)
     const initialProgress = useMotionValue(0)
 
     useEffect(() => {
-        // Animate to 50% on mount
-        const animation = animate(initialProgress, 0.5, {
+        // Animate to 75% on mount
+        const animation = animate(initialProgress, 0.75, {
             duration: 1.5,
             ease: "easeInOut",
             delay: 0.2 // Small delay after mount
@@ -56,8 +56,8 @@ export default function EventJourneyLine() {
     // Scroll progress animation
     const { scrollYProgress } = useScroll()
 
-    // Map scroll (0-1) to the remaining 50% (0-0.5)
-    const scrollPart = useTransform(scrollYProgress, [0, 1], [0, 0.5])
+    // Map scroll (0-1) to the remaining 25% (0-0.25)
+    const scrollPart = useTransform(scrollYProgress, [0, 1], [0, 0.25])
 
     // Combine initial animation and scroll
     const targetPathLength = useTransform(
@@ -80,6 +80,8 @@ export default function EventJourneyLine() {
     const w = windowWidth
     const h = svgHeight
 
+    const isMobile = w < 768
+
     // Start a little left from top right
     const startX = w * 0.8
     const startY = -100 // Start off-screen
@@ -89,6 +91,13 @@ export default function EventJourneyLine() {
     d += ` C ${w * 0.05} ${startY + 100}, ${w * 0.01} ${h}, ${w * 0.83} ${h * 0.4}`
 
     const opacity = useTransform(pathLength, [0, 0.05], [0, 1])
+
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) return null
 
     return (
         <div
@@ -105,15 +114,6 @@ export default function EventJourneyLine() {
                 className="w-full h-full"
             >
                 <defs>
-                    <filter id="glow-event" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="12" result="blur1" />
-                        <feGaussianBlur stdDeviation="6" result="blur2" />
-                        <feMerge>
-                            <feMergeNode in="blur1" />
-                            <feMergeNode in="blur2" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
                     <linearGradient id="lineGradientEvent" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stopColor="#3b82f6" /> {/* Blue-500 */}
                         <stop offset="50%" stopColor="#60a5fa" /> {/* Blue-400 */}
@@ -124,11 +124,11 @@ export default function EventJourneyLine() {
                 <motion.path
                     d={d}
                     stroke="url(#lineGradientEvent)"
-                    strokeWidth="20"
+                    strokeWidth={isMobile ? "40" : "85"}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     fill="none"
-                    filter="url(#glow-event)"
+                    className="blur-[20px] opacity-30 mix-blend-screen drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                     style={{ pathLength, opacity }}
                 />
             </svg>

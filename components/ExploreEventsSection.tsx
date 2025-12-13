@@ -12,7 +12,7 @@ export default function ExploreEventsSection() {
 
     return (
         <section className="pt-32 pb-12 bg-background relative">
-            <div className="container mx-auto px-4 relative z-20">
+            <div className="container mx-auto px-4 min-[425px]:px-12 relative z-20">
                 <h2 className="text-left text-white font-light text-xl sm:text-3xl mb-12 flex items-center gap-2 sm:gap-4">
                     <span className="font-thin text-white/50 tracking-tighter">&mdash;&mdash;&mdash;</span>
                     <span>Explore <span className="font-semibold text-blue-600">Events</span></span>
