@@ -9,8 +9,8 @@ import AuthGuard from "@/components/shared/AuthGuard";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Admin Dashboard - Turnkey",
-    description: "Admin dashboard for Turnkey sports events platform.",
+    title: "Admin Dashboard",
+    description: "Admin dashboard for sports events platform.",
 };
 
 export default function AdminLayout({
