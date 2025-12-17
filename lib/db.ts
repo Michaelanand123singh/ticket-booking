@@ -1,39 +1,55 @@
 import { PrismaClient } from '@prisma/client'
 
 const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined
+  prismaClientV7: PrismaClient | undefined
 }
 
 // Ensure DATABASE_URL has a database name
 function ensureDatabaseName(url: string | undefined): string {
   if (!url) {
-    // During build time, use a dummy URL to allow Prisma client generation
-    // Cloud build environments may not have DATABASE_URL set during build phase
-    // This is safe because Prisma client generation only needs the schema, not a real connection
     if (typeof window === 'undefined' && (process.env.NEXT_PHASE === 'phase-production-build' || process.argv.some(arg => arg.includes('build') || arg.includes('prisma')))) {
       return 'mongodb://localhost:27017/temp'
     }
-    // In runtime, throw error if DATABASE_URL is missing
     throw new Error('DATABASE_URL environment variable is not set. Please configure it in your environment variables.')
   }
 
-  // If URL ends with / or doesn't have a database name, add one
-  if (url.endsWith('/') || !url.match(/mongodb\+srv:\/\/[^/]+\/[^/?]+/)) {
-    // Extract base URL (everything before the last / or ?)
-    const baseUrl = url.split('?')[0].replace(/\/$/, '')
-    const queryParams = url.includes('?') ? '?' + url.split('?')[1] : '?retryWrites=true&w=majority'
-    
-    // Add database name
-    const databaseName = 'ticketsystem'
-    return `${baseUrl}/${databaseName}${queryParams}`
+  // Remove surrounding quotes if present
+  let cleanUrl = url.replace(/^["']|["']$/g, '');
+
+  console.log('Checking DATABASE_URL:', cleanUrl.replace(/:([^:@]+)@/, ':****@'));
+
+  // Check if URL already has a database name using a simplified robust check
+  const urlPath = cleanUrl.split('?')[0];
+  const protocolIndex = urlPath.indexOf('://');
+  if (protocolIndex === -1) return cleanUrl;
+
+  const pathStartIndex = protocolIndex + 3;
+  const firstSlashAfterProtocol = urlPath.indexOf('/', pathStartIndex);
+
+  if (firstSlashAfterProtocol !== -1 && firstSlashAfterProtocol < urlPath.length - 1) {
+    console.log('Database name detected in URL.');
+    // If we are in development, FORCE strip query params to avoid "replica set" requirement for standalone
+    if (process.env.NODE_ENV !== 'production') {
+      return cleanUrl.split('?')[0];
+    }
+    return cleanUrl;
   }
 
-  // Ensure query parameters are present
-  if (!url.includes('?')) {
-    return `${url}?retryWrites=true&w=majority`
+  console.log('No database name detected. Appending ticketsystem...');
+
+  // Extract base URL (everything before the last / or ?)
+  const baseUrl = cleanUrl.split('?')[0].replace(/\/$/, '')
+
+  // Add database name, NO query params in dev
+  const databaseName = 'ticketsystem'
+
+  if (process.env.NODE_ENV !== 'production') {
+    return `${baseUrl}/${databaseName}`
   }
 
-  return url
+  // In prod, preserve existing params or add defaults ONLY if needed
+  const queryParams = cleanUrl.includes('?') ? '?' + cleanUrl.split('?')[1] : '?retryWrites=true&w=majority'
+  return `${baseUrl}/${databaseName}${queryParams}`
 }
 
 // Get and validate DATABASE_URL (with fallback for build time)
@@ -44,7 +60,7 @@ if (typeof process !== 'undefined' && process.env) {
   process.env.DATABASE_URL = databaseUrl
 }
 
-export const prisma = globalForPrisma.prisma ?? new PrismaClient({
+export const prisma = globalForPrisma.prismaClientV7 ?? new PrismaClient({
   datasources: {
     db: {
       url: databaseUrl,
@@ -52,5 +68,4 @@ export const prisma = globalForPrisma.prisma ?? new PrismaClient({
   },
 })
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
-
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prismaClientV7 = prisma

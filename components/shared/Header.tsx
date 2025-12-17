@@ -97,45 +97,47 @@ export default function Header() {
           <div className="flex items-center justify-end gap-6 flex-1">
             {/* Desktop Navigation */}
             <div className="hidden md:flex">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink asChild className={cn(
-                      navigationMenuTriggerStyle(),
-                      "!bg-transparent hover:!bg-transparent focus:!bg-transparent data-[active]:!bg-transparent data-[state=open]:!bg-transparent",
-                      "text-white hover:text-white/80 focus:text-white data-[state=open]:text-white data-[active]:text-white"
-                    )}>
-                      <Link href="/">
-                        Home
-                      </Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                  {navItems.map((section) => (
-                    <NavigationMenuItem key={section.title}>
-                      <NavigationMenuTrigger className={cn(
+              {hasMounted && (
+                <NavigationMenu>
+                  <NavigationMenuList>
+                    <NavigationMenuItem>
+                      <NavigationMenuLink asChild className={cn(
+                        navigationMenuTriggerStyle(),
                         "!bg-transparent hover:!bg-transparent focus:!bg-transparent data-[active]:!bg-transparent data-[state=open]:!bg-transparent",
                         "text-white hover:text-white/80 focus:text-white data-[state=open]:text-white data-[active]:text-white"
                       )}>
-                        {section.title}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="bg-white">
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                          {section.items.map((item) => (
-                            <ListItem
-                              key={item.title}
-                              title={item.title}
-                              href={item.href}
-                              icon={item.icon}
-                            >
-                              {item.description}
-                            </ListItem>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
+                        <Link href="/">
+                          Home
+                        </Link>
+                      </NavigationMenuLink>
                     </NavigationMenuItem>
-                  ))}
-                </NavigationMenuList>
-              </NavigationMenu>
+                    {navItems.map((section) => (
+                      <NavigationMenuItem key={section.title}>
+                        <NavigationMenuTrigger className={cn(
+                          "!bg-transparent hover:!bg-transparent focus:!bg-transparent data-[active]:!bg-transparent data-[state=open]:!bg-transparent",
+                          "text-white hover:text-white/80 focus:text-white data-[state=open]:text-white data-[active]:text-white"
+                        )}>
+                          {section.title}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent className="bg-white">
+                          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                            {section.items.map((item) => (
+                              <ListItem
+                                key={item.title}
+                                title={item.title}
+                                href={item.href}
+                                icon={item.icon}
+                              >
+                                {item.description}
+                              </ListItem>
+                            ))}
+                          </ul>
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    ))}
+                  </NavigationMenuList>
+                </NavigationMenu>
+              )}
             </div>
 
             {/* Desktop Auth Buttons */}
