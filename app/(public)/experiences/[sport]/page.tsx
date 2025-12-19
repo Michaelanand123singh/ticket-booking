@@ -1,8 +1,7 @@
-import React from 'react'
-import { ArrowUpDown, Filter } from 'lucide-react'
 import SportHero from '@/components/experiences/SportHero'
-import SportEventCard from '@/components/events/SportEventCard'
-import EventJourneyLine from '@/components/events/EventJourneyLine'
+import SportEventCard from '@/components/experiences/SportEventCard'
+import TrendingTournamentsCarousel from '@/components/home/TrendingTournamentsCarousel'
+
 
 // Mock data generator based on sport
 const getSportData = (sport: string) => {
@@ -51,8 +50,8 @@ export default async function SportPage({ params }: { params: Promise<{ sport: s
     const data = getSportData(sport)
 
     return (
-        <div className="min-h-screen bg-[#11212D] text-white relative">
-            <EventJourneyLine />
+        <div className="min-h-screen bg-black text-white relative">
+
             {/* Hero Section */}
             <SportHero
                 sport={sport}
@@ -61,31 +60,43 @@ export default async function SportPage({ params }: { params: Promise<{ sport: s
                 cardImage={data.cardImage}
             />
 
-            {/* Content Container */}
-            <div className="container mx-auto px-4 py-12 relative z-10">
-                {/* Sort and Filter Buttons */}
-                <div className="mb-12 flex gap-4">
-                    <button className="flex items-center gap-2 px-6 py-3 bg-[#1e293b] border border-gray-700 rounded-lg text-white hover:bg-gray-800 transition-colors">
-                        <ArrowUpDown className="w-4 h-4" />
-                        Sort
-                    </button>
-                    <button className="flex items-center gap-2 px-6 py-3 bg-[#1e293b] border border-gray-700 rounded-lg text-white hover:bg-gray-800 transition-colors">
-                        <Filter className="w-4 h-4" />
-                        Filter
-                    </button>
+            {/* Trending Tournaments Section - Full Width */}
+            <div className="w-full py-12 relative z-10">
+                <div className="container mx-auto px-4 mb-8">
+                    <h2 className="text-2xl md:text-3xl font-normal text-white text-left">
+                        Trending {sport} tournaments
+                    </h2>
                 </div>
+                <div className="w-full">
+                    <TrendingTournamentsCarousel items={[
+                        { name: `Global ${sport} Cup`, src: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&q=80&w=800" },
+                        { name: `National ${sport} League`, src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800" },
+                        { name: `${sport} World Championship`, src: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?auto=format&fit=crop&q=80&w=800" },
+                        { name: `Regional ${sport} Finals`, src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=800" },
+                        { name: `Pro ${sport} Series`, src: "https://images.unsplash.com/photo-1624880357913-a8539238245b?auto=format&fit=crop&q=80&w=800" },
+                    ]} />
+                </div>
+            </div>
 
-                {/* Events Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+            {/* Content Container */}
+            <div className="container mx-auto px-4 pb-20 relative z-10">
+                {/* Other Tournaments Heading */}
+                <h2 className="text-2xl md:text-3xl font-normal text-white text-left mb-8">
+                    Other Tournaments
+                </h2>
+
+                {/* Events Horizontal Scroll - 2 Rows */}
+                <div className="grid grid-rows-2 grid-flow-col gap-6 pb-8 overflow-x-auto snap-x [.::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                     {data.events.map((event) => (
-                        <SportEventCard
-                            key={event.id}
-                            title={event.title}
-                            date={event.date}
-                            location={event.location}
-                            description={event.description}
-                            image={event.image}
-                        />
+                        <div key={event.id} className="min-w-[300px] w-[300px] md:min-w-[350px] md:w-[350px] snap-start">
+                            <SportEventCard
+                                title={event.title}
+                                date={event.date}
+                                location={event.location}
+                                description={event.description}
+                                image={event.image}
+                            />
+                        </div>
                     ))}
                 </div>
             </div>
