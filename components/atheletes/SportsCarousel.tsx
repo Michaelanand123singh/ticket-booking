@@ -1,7 +1,5 @@
 "use client"
 
-//NOTE (IMPORTANT) -> This file is to be kept in the project as the component in this file is to be used inside the experience page, make sure you do not delete this component.
-//-Minaal
 import React, { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
@@ -52,7 +50,11 @@ const sportsItems = [
     },
 ]
 
-export default function ExploreSportsSection() {
+interface SportsCarouselProps {
+    hideHeading?: boolean;
+}
+
+export default function SportsCarousel({ hideHeading = false }: SportsCarouselProps) {
     const [offset, setOffset] = React.useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -74,14 +76,17 @@ export default function ExploreSportsSection() {
     };
 
     return (
-        <section className="pt-20 pb-0 bg-background relative">
+        <section className={`pt-20 pb-0 bg-black relative`}>
+            {/* Added bg-black to ensure background matches if needed, though originally was bg-background (likely same in dark theme) */}
             <div className="container mx-auto px-4 min-[425px]:px-12 relative z-20">
-                <div className="flex items-center justify-between mb-2 pl-8 md:pl-16 pr-4 max-w-[1280px] mx-auto">
-                    <h2 className="text-left text-white font-light text-xl sm:text-3xl flex flex-wrap items-center justify-start gap-4">
-                        <span>Explore <span className="font-semibold text-blue-600">Sports</span></span>
-                        <span className="font-thin text-white/50 tracking-tighter">&mdash;&mdash;&mdash;</span>
-                    </h2>
-                </div>
+                {!hideHeading && (
+                    <div className="flex items-center justify-between mb-2 pl-8 md:pl-16 pr-4 max-w-[1280px] mx-auto">
+                        <h2 className="text-left text-white font-light text-xl sm:text-3xl flex flex-wrap items-center justify-start gap-4">
+                            <span>Explore <span className="font-semibold text-blue-600">Sports</span></span>
+                            <span className="font-thin text-white/50 tracking-tighter">&mdash;&mdash;&mdash;</span>
+                        </h2>
+                    </div>
+                )}
 
                 <div className="relative max-w-[1280px] mx-auto">
                     <Button
