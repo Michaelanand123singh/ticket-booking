@@ -5,6 +5,7 @@ type BlurTextProps = {
   text?: string;
   delay?: number;
   className?: string;
+  childClassName?: string;
   animateBy?: 'words' | 'letters';
   direction?: 'top' | 'bottom';
   threshold?: number;
@@ -33,6 +34,7 @@ const BlurText: React.FC<BlurTextProps> = ({
   text = '',
   delay = 200,
   className = '',
+  childClassName = '',
   animateBy = 'words',
   direction = 'top',
   threshold = 0.1,
@@ -106,6 +108,7 @@ const BlurText: React.FC<BlurTextProps> = ({
             animate={inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
+            className={childClassName}
             style={{
               display: 'inline-block',
               willChange: 'transform, filter, opacity'

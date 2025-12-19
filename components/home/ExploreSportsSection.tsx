@@ -1,5 +1,7 @@
 "use client"
 
+//NOTE (IMPORTANT) -> This file is to be kept in the project as the component in this file is to be used inside the experience page, make sure you do not delete this component.
+//-Minaal
 import React, { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight } from 'lucide-react'

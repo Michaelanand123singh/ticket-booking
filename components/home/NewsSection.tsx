@@ -108,9 +108,9 @@ export default function NewsSection() {
     const currentData = newsPages[currentIndex]
 
     return (
-        <section className="py-8 bg-white w-full relative z-20">
+        <section className="py-8 bg-black w-full relative z-20">
             <div className="container mx-auto px-4 min-[425px]:px-12">
-                <h2 className="text-3xl font-normal text-black mb-4">News</h2>
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-[#FDB931] via-[#FFFFAC] to-[#D4AF37] bg-clip-text text-transparent mb-4">News</h2>
 
                 {/* Content Container with Flip Effect */}
                 <div
@@ -118,7 +118,7 @@ export default function NewsSection() {
                         }`}
                 >
                     {/* Left Column: Main Card */}
-                    <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col h-[450px] lg:h-full">
+                    <div className="bg-[#111111] rounded-2xl shadow-lg overflow-hidden border border-white/10 flex flex-col h-[450px] lg:h-full">
                         <div className="h-1/2 relative">
                             <img
                                 src={currentData.main.image}
@@ -134,10 +134,10 @@ export default function NewsSection() {
                                 </div>
                             </div>
                             <div className="flex-grow">
-                                <h3 className="text-xl font-medium text-gray-900 mb-2 leading-tight">
+                                <h3 className="text-xl font-medium text-white mb-2 leading-tight">
                                     {currentData.main.title}
                                 </h3>
-                                <div className="text-xs text-gray-500 space-y-2 leading-relaxed line-clamp-4">
+                                <div className="text-xs text-gray-300 space-y-2 leading-relaxed line-clamp-4">
                                     {currentData.main.description.split('\n\n').map((para, idx) => (
                                         <p key={idx}>{para}</p>
                                     ))}
@@ -149,7 +149,7 @@ export default function NewsSection() {
                     {/* Middle Column: Stacked Side Cards */}
                     <div className="flex flex-col gap-3 h-auto lg:h-full">
                         {currentData.side.map((item, idx) => (
-                            <div key={item.id} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 flex h-32 lg:h-1/3">
+                            <div key={item.id} className="bg-[#111111] rounded-xl shadow-md overflow-hidden border border-white/10 flex h-32 lg:h-1/3">
                                 <div className="w-1/3 relative">
                                     <img
                                         src={item.image}
@@ -158,10 +158,10 @@ export default function NewsSection() {
                                     />
                                 </div>
                                 <div className="w-2/3 p-3 flex flex-col justify-center">
-                                    <h4 className="text-sm font-bold text-gray-900 mb-1 line-clamp-2">
+                                    <h4 className="text-sm font-bold text-white mb-1 line-clamp-2">
                                         {item.title}
                                     </h4>
-                                    <p className="text-[10px] text-gray-500 line-clamp-2 leading-relaxed">
+                                    <p className="text-[10px] text-gray-300 line-clamp-2 leading-relaxed">
                                         {item.description}
                                     </p>
                                 </div>
@@ -207,7 +207,7 @@ export default function NewsSection() {
                 <div className="flex justify-center mt-6">
                     <button
                         onClick={handleNext}
-                        className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+                        className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
                         aria-label="Next news"
                     >
                         <ArrowDown className={`w-5 h-5 transition-transform duration-300 ${isFlipping ? 'rotate-180' : ''}`} />

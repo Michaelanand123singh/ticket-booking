@@ -6,49 +6,8 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
 import { FiMenu, FiX } from 'react-icons/fi'
-import { Trophy, Music, Calendar, Newspaper, Briefcase, FileText, Mic, Activity, Home } from 'lucide-react'
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navbar"
 
-
-const navItems = [
-  {
-    title: "Experiences",
-    items: [
-      { title: "Football", href: "/experiences/football", icon: Trophy, description: "Latest football matches and news." },
-      { title: "Basketball", href: "/experiences/basketball", icon: Activity, description: "NBA and local basketball events." },
-      { title: "Tennis", href: "/experiences/tennis", icon: Trophy, description: "Grand Slam and ATP tournaments." },
-      { title: "Cricket", href: "/experiences/cricket", icon: Activity, description: "International and league cricket." },
-      { title: "Rugby", href: "/experiences/rugby", icon: Activity, description: "Intensity and passion on the field." },
-    ]
-  },
-  {
-    title: "Event Organisers",
-    items: [
-      { title: "Concerts", href: "#", icon: Music, description: "Live music performances." },
-      { title: "Festivals", href: "#", icon: Calendar, description: "Cultural and music festivals." },
-      { title: "Workshops", href: "#", icon: Briefcase, description: "Skill-building sessions." },
-      { title: "Conferences", href: "#", icon: Mic, description: "Professional gatherings." },
-    ]
-  },
-  {
-    title: "News",
-    items: [
-      { title: "Latest News", href: "#", icon: Newspaper, description: "Breaking sports and event news." },
-      { title: "Press Releases", href: "#", icon: FileText, description: "Official announcements." },
-      { title: "Blog", href: "#", icon: FileText, description: "Stories and articles." },
-    ]
-  }
-]
 
 export default function Header() {
   const pathname = usePathname()
@@ -77,7 +36,7 @@ export default function Header() {
   return (
     <header className={cn(
       "fixed top-0 w-full z-50 transition-all duration-300",
-      (isScrolled || mobileMenuOpen) ? "bg-black/20 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-transparent"
+      (isScrolled || mobileMenuOpen) ? "bg-black/90 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-transparent"
     )}>
       <div className="container mx-auto px-4 min-[425px]:px-12 py-2">
 
@@ -96,76 +55,71 @@ export default function Header() {
 
           <div className="flex items-center justify-end gap-6 flex-1">
             {/* Desktop Navigation */}
-            <div className="hidden md:flex">
-              {hasMounted && (
-                <NavigationMenu>
-                  <NavigationMenuList>
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild className={cn(
-                        navigationMenuTriggerStyle(),
-                        "!bg-transparent hover:!bg-transparent focus:!bg-transparent data-[active]:!bg-transparent data-[state=open]:!bg-transparent",
-                        "text-white hover:text-white/80 focus:text-white data-[state=open]:text-white data-[active]:text-white"
-                      )}>
-                        <Link href="/">
-                          Home
-                        </Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                    {navItems.map((section) => (
-                      <NavigationMenuItem key={section.title}>
-                        <NavigationMenuTrigger className={cn(
-                          "!bg-transparent hover:!bg-transparent focus:!bg-transparent data-[active]:!bg-transparent data-[state=open]:!bg-transparent",
-                          "text-white hover:text-white/80 focus:text-white data-[state=open]:text-white data-[active]:text-white"
-                        )}>
-                          {section.title}
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent className="bg-white">
-                          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                            {section.items.map((item) => (
-                              <ListItem
-                                key={item.title}
-                                title={item.title}
-                                href={item.href}
-                                icon={item.icon}
-                              >
-                                {item.description}
-                              </ListItem>
-                            ))}
-                          </ul>
-                        </NavigationMenuContent>
-                      </NavigationMenuItem>
-                    ))}
-                  </NavigationMenuList>
-                </NavigationMenu>
-              )}
-            </div>
-
-            {/* Desktop Auth Buttons */}
-            {/* <div className="hidden md:flex items-center gap-4">
-              {isAuthenticated ? (
-                <Button
-                  onClick={handleLogout}
-                  variant="ghost"
-                  className="text-white hover:text-white hover:bg-white/10"
+            <div className="hidden md:flex items-center gap-8">
+              {/* Experiences Dropdown */}
+              <div className="group relative h-full flex items-center">
+                <Link
+                  href="/experiences"
+                  className="text-white hover:text-white/80 font-normal text-sm transition-colors py-4 inline-block"
                 >
-                  Logout
-                </Button>
-              ) : (
-                <>
-                  <Link href="/auth/login">
-                    <Button variant="ghost" className="text-white hover:text-white hover:bg-white/10">
-                      Log In
-                    </Button>
-                  </Link>
-                  <Link href="/auth/register">
-                    <Button className="bg-white text-black hover:bg-white/90">
-                      Sign Up
-                    </Button>
-                  </Link>
-                </>
-              )}
-            </div> */}
+                  Experiences
+                </Link>
 
+                {/* Dropdown Menu */}
+                <div className="absolute top-full left-0 pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left z-50">
+                  <div className="bg-black/95 backdrop-blur-md border border-white/10 rounded-lg shadow-xl overflow-hidden flex flex-col py-2">
+                    <Link href="/experiences/football" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
+                      Football
+                    </Link>
+                    <Link href="/experiences/cricket" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
+                      Cricket
+                    </Link>
+                    <Link href="/experiences/tennis" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
+                      Tennis
+                    </Link>
+                    <Link href="/experiences/basketball" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
+                      Basketball
+                    </Link>
+                    <Link href="/experiences/rugby" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
+                      Rugby
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              {/* Athlete Dropdown */}
+              <div className="group relative h-full flex items-center">
+                <Link
+                  href="/athlete"
+                  className="text-white hover:text-white/80 font-normal text-sm transition-colors py-4 inline-block"
+                >
+                  Athlete
+                </Link>
+
+                {/* Dropdown Menu */}
+                <div className="absolute top-full left-0 pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left z-50">
+                  <div className="bg-black/95 backdrop-blur-md border border-white/10 rounded-lg shadow-xl overflow-hidden flex flex-col py-2">
+                    <Link href="/atheletes/professional" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
+                      Professional
+                    </Link>
+                    <Link href="/atheletes/recreational" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
+                      Recreational
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <Link
+                href="/events"
+                className="text-white hover:text-white/80 font-normal text-sm transition-colors"
+              >
+                Event Organiser
+              </Link>
+              <Link
+                href="/news"
+                className="text-white hover:text-white/80 font-normal text-sm transition-colors"
+              >
+                News & blogs
+              </Link>
+            </div>
 
             {/* Mobile Menu Button */}
             <button
@@ -183,90 +137,111 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden w-full border-t border-white/10 bg-black/10 backdrop-blur-xl h-[calc(100vh-5rem)] overflow-y-auto">
-          <div className="container mx-auto px-4 py-4">
-            <nav className="flex flex-col space-y-4">
-              <Link
-                href="/"
-                className="font-semibold text-white"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-              {navItems.map((section) => (
-                <div key={section.title} className="flex flex-col space-y-2">
-                  <span className="font-semibold text-white">{section.title}</span>
-                  {section.items.map((item) => (
+      {
+        mobileMenuOpen && (
+          <div className="md:hidden w-full border-t border-white/10 bg-black/95 backdrop-blur-xl h-[calc(100vh-5rem)] overflow-y-auto">
+            <div className="container mx-auto px-4 py-4">
+              <nav className="flex flex-col space-y-6 mt-4">
+                <Link
+                  href="/"
+                  className="text-lg font-semibold text-white"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                <div className="flex flex-col gap-4">
+                  <Link
+                    href="/experiences"
+                    className="text-lg font-semibold text-white"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Experiences
+                  </Link>
+                  <div className="flex flex-col pl-4 gap-3 border-l border-white/20 ml-2">
                     <Link
-                      key={item.title}
-                      href={item.href}
-                      className="text-gray-300 pl-4"
+                      href="/experiences/football"
+                      className="text-sm text-gray-300 hover:text-[#D4AF37]"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      {item.title}
+                      Football
                     </Link>
-                  ))}
+                    <Link
+                      href="/experiences/cricket"
+                      className="text-sm text-gray-300 hover:text-[#D4AF37]"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Cricket
+                    </Link>
+                    <Link
+                      href="/experiences/tennis"
+                      className="text-sm text-gray-300 hover:text-[#D4AF37]"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Tennis
+                    </Link>
+                    <Link
+                      href="/experiences/basketball"
+                      className="text-sm text-gray-300 hover:text-[#D4AF37]"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Basketball
+                    </Link>
+                    <Link
+                      href="/experiences/rugby"
+                      className="text-sm text-gray-300 hover:text-[#D4AF37]"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Rugby
+                    </Link>
+                  </div>
                 </div>
-              ))}
-            </nav>
-            {/* <div className="mt-8 flex flex-col gap-4">
-              {isAuthenticated ? (
-                <Button
-                  onClick={handleLogout}
-                  variant="outline"
-                  className="w-full justify-center text-white border-white/20 hover:bg-white/10 hover:text-white"
+                <div className="flex flex-col gap-4">
+                  <Link
+                    href="/athlete"
+                    className="text-lg font-semibold text-white"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Athlete
+                  </Link>
+                  <div className="flex flex-col pl-4 gap-3 border-l border-white/20 ml-2">
+                    <Link
+                      href="/atheletes/professional"
+                      className="text-sm text-gray-300 hover:text-[#D4AF37]"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Professional
+                    </Link>
+                    <Link
+                      href="/atheletes/recreational"
+                      className="text-sm text-gray-300 hover:text-[#D4AF37]"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Recreational
+                    </Link>
+                  </div>
+                </div>
+                <Link
+                  href="/events"
+                  className="text-lg font-semibold text-white"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  Logout
-                </Button>
-              ) : (
-                <>
-                  <Link href="/auth/login" onClick={() => setMobileMenuOpen(false)}>
-                    <Button variant="ghost" className="w-full justify-start text-white hover:text-white hover:bg-white/10">
-                      Log In
-                    </Button>
-                  </Link>
-                  <Link href="/auth/register" onClick={() => setMobileMenuOpen(false)}>
-                    <Button className="w-full bg-white text-black hover:bg-white/90">
-                      Sign Up
-                    </Button>
-                  </Link>
-                </>
-              )}
-            </div> */}
+                  Event Organisers
+                </Link>
+                <Link
+                  href="/news"
+                  className="text-lg font-semibold text-white"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  News
+                </Link>
+              </nav>
+            </div>
           </div>
-        </div>
-      )}
-    </header>
+        )
+      }
+    </header >
   )
 }
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { icon: React.ElementType }
->(({ className, title, children, icon: Icon, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="flex items-center gap-2 text-sm font-medium leading-none text-black">
-            <Icon className="h-4 w-4" />
-            {title}
-          </div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  )
-})
-ListItem.displayName = "ListItem"
+
 
