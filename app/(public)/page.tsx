@@ -3,6 +3,7 @@ import WhatWeOffer from '@/components/home/WhatWeOffer'
 import NewsSection from '@/components/home/NewsSection'
 import TrendingTournaments from '@/components/home/TrendingTournaments'
 import AthleteSelection from '@/components/home/AthleteSelection'
+import TestimonialSection from '@/components/home/TestimonialSection'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <TrendingTournaments />
       <AthleteSelection />
       <WhatWeOffer />
+      <TestimonialSection />
       <NewsSection />
     </div>
   )
