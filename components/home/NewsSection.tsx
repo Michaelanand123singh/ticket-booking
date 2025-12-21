@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { ArrowDown } from 'lucide-react'
+import AnimatedContent from './AnimatedContent'
 
 // --- Types ---
 type NewsItem = {
@@ -110,98 +111,114 @@ export default function NewsSection() {
     return (
         <section className="py-8 bg-black w-full relative z-20">
             <div className="container mx-auto px-4 min-[425px]:px-12">
-                <h2 className="text-3xl font-bold bg-gradient-to-r from-[#FDB931] via-[#FFFFAC] to-[#D4AF37] bg-clip-text text-transparent mb-4">News</h2>
+                <AnimatedContent
+                    distance={100}
+                    direction="vertical"
+                    duration={1}
+                    ease="power3.out"
+                    delay={0.1}
+                >
+                    <h2 className="text-3xl font-bold bg-gradient-to-r from-[#FDB931] via-[#FFFFAC] to-[#D4AF37] bg-clip-text text-transparent mb-4">News</h2>
+                </AnimatedContent>
 
                 {/* Content Container with Flip Effect */}
-                <div
-                    className={`grid grid-cols-1 lg:grid-cols-3 gap-4 lg:h-[60vh] h-auto transition-all duration-500 ease-in-out transform ${isFlipping ? 'opacity-0 scale-y-0' : 'opacity-100 scale-y-100'
-                        }`}
+                <AnimatedContent
+                    distance={100}
+                    direction="vertical"
+                    duration={1}
+                    ease="power3.out"
+                    delay={0.3}
                 >
-                    {/* Left Column: Main Card */}
-                    <div className="bg-[#111111] rounded-2xl shadow-lg overflow-hidden border border-white/10 flex flex-col h-[450px] lg:h-full">
-                        <div className="h-1/2 relative">
+                    <div
+                        className={`grid grid-cols-1 lg:grid-cols-3 gap-4 lg:h-[60vh] h-auto transition-all duration-500 ease-in-out transform ${isFlipping ? 'opacity-0 scale-y-0' : 'opacity-100 scale-y-100'
+                            }`}
+                    >
+                        {/* Left Column: Main Card */}
+                        <div className="bg-[#111111] rounded-2xl shadow-lg overflow-hidden border border-white/10 flex flex-col h-[450px] lg:h-full">
+                            <div className="h-1/2 relative">
+                                <img
+                                    src={currentData.main.image}
+                                    alt={currentData.main.title}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div className="p-4 flex flex-1 gap-4">
+                                <div className="flex-shrink-0">
+                                    <div className="w-14 h-14 bg-teal-600 text-white flex flex-col items-center justify-center rounded-lg shadow-sm">
+                                        <span className="text-[10px] font-bold uppercase">{currentData.main.date?.month}</span>
+                                        <span className="text-xl font-bold">{currentData.main.date?.day}</span>
+                                    </div>
+                                </div>
+                                <div className="flex-grow">
+                                    <h3 className="text-xl font-medium text-white mb-2 leading-tight">
+                                        {currentData.main.title}
+                                    </h3>
+                                    <div className="text-xs text-gray-300 space-y-2 leading-relaxed line-clamp-4">
+                                        {currentData.main.description.split('\n\n').map((para, idx) => (
+                                            <p key={idx}>{para}</p>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Middle Column: Stacked Side Cards */}
+                        <div className="flex flex-col gap-3 h-auto lg:h-full">
+                            {currentData.side.map((item, idx) => (
+                                <div key={item.id} className="bg-[#111111] rounded-xl shadow-md overflow-hidden border border-white/10 flex h-32 lg:h-1/3">
+                                    <div className="w-1/3 relative">
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    <div className="w-2/3 p-3 flex flex-col justify-center">
+                                        <h4 className="text-sm font-bold text-white mb-1 line-clamp-2">
+                                            {item.title}
+                                        </h4>
+                                        <p className="text-[10px] text-gray-300 line-clamp-2 leading-relaxed">
+                                            {item.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Right Column: Highlight Card (Improved Design) */}
+                        <div className="relative rounded-2xl shadow-lg overflow-hidden h-[450px] lg:h-full group">
+                            {/* Background Image */}
                             <img
-                                src={currentData.main.image}
-                                alt={currentData.main.title}
-                                className="w-full h-full object-cover"
+                                src={currentData.highlight.image}
+                                alt={currentData.highlight.title}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
-                        </div>
-                        <div className="p-4 flex flex-1 gap-4">
-                            <div className="flex-shrink-0">
-                                <div className="w-14 h-14 bg-teal-600 text-white flex flex-col items-center justify-center rounded-lg shadow-sm">
-                                    <span className="text-[10px] font-bold uppercase">{currentData.main.date?.month}</span>
-                                    <span className="text-xl font-bold">{currentData.main.date?.day}</span>
+
+                            {/* Gradient Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+
+                            {/* Content */}
+                            <div className="relative z-10 h-full flex flex-col justify-end p-6 text-white">
+                                <div className="mb-auto">
+                                    <span className="inline-block px-3 py-1 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full mb-4">
+                                        Trending
+                                    </span>
                                 </div>
-                            </div>
-                            <div className="flex-grow">
-                                <h3 className="text-xl font-medium text-white mb-2 leading-tight">
-                                    {currentData.main.title}
+
+                                <h3 className="text-2xl font-bold mb-3 leading-tight">
+                                    {currentData.highlight.title}
                                 </h3>
-                                <div className="text-xs text-gray-300 space-y-2 leading-relaxed line-clamp-4">
-                                    {currentData.main.description.split('\n\n').map((para, idx) => (
-                                        <p key={idx}>{para}</p>
-                                    ))}
-                                </div>
+                                <p className="text-xs text-gray-200 leading-relaxed mb-4 line-clamp-4">
+                                    {currentData.highlight.description}
+                                </p>
+
+                                <button className="text-xs font-semibold uppercase tracking-wide border-b border-white/30 pb-1 hover:border-white transition-colors w-max">
+                                    Read More
+                                </button>
                             </div>
                         </div>
                     </div>
-
-                    {/* Middle Column: Stacked Side Cards */}
-                    <div className="flex flex-col gap-3 h-auto lg:h-full">
-                        {currentData.side.map((item, idx) => (
-                            <div key={item.id} className="bg-[#111111] rounded-xl shadow-md overflow-hidden border border-white/10 flex h-32 lg:h-1/3">
-                                <div className="w-1/3 relative">
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
-                                <div className="w-2/3 p-3 flex flex-col justify-center">
-                                    <h4 className="text-sm font-bold text-white mb-1 line-clamp-2">
-                                        {item.title}
-                                    </h4>
-                                    <p className="text-[10px] text-gray-300 line-clamp-2 leading-relaxed">
-                                        {item.description}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Right Column: Highlight Card (Improved Design) */}
-                    <div className="relative rounded-2xl shadow-lg overflow-hidden h-[450px] lg:h-full group">
-                        {/* Background Image */}
-                        <img
-                            src={currentData.highlight.image}
-                            alt={currentData.highlight.title}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-
-                        {/* Content */}
-                        <div className="relative z-10 h-full flex flex-col justify-end p-6 text-white">
-                            <div className="mb-auto">
-                                <span className="inline-block px-3 py-1 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full mb-4">
-                                    Trending
-                                </span>
-                            </div>
-
-                            <h3 className="text-2xl font-bold mb-3 leading-tight">
-                                {currentData.highlight.title}
-                            </h3>
-                            <p className="text-xs text-gray-200 leading-relaxed mb-4 line-clamp-4">
-                                {currentData.highlight.description}
-                            </p>
-
-                            <button className="text-xs font-semibold uppercase tracking-wide border-b border-white/30 pb-1 hover:border-white transition-colors w-max">
-                                Read More
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                </AnimatedContent>
 
                 {/* Arrow Button */}
                 <div className="flex justify-center mt-6">

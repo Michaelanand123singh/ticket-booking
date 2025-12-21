@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { Carousel } from "@ark-ui/react/carousel";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { gsap } from "gsap";
+import AnimatedContent from "@/components/home/AnimatedContent";
 
 /* ===================== DATA ===================== */
 
@@ -13,22 +15,27 @@ const trendingTournaments = [
     {
         src: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1000&auto=format&fit=crop",
         name: "Champions League Final 2024",
+        link: "/experiences/football/champions-league"
     },
     {
         src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1000&auto=format&fit=crop",
         name: "Wimbledon Championship",
+        link: "/experiences/tennis/wimbledon"
     },
     {
         src: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=1000&auto=format&fit=crop",
         name: "Qatar World Cup",
+        link: "/experiences/football/world-cup"
     },
     {
         src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=1000&auto=format&fit=crop",
         name: "Super Bowl LVIII",
+        link: "/experiences/rugby/super-bowl"
     },
     {
         src: "https://images.unsplash.com/photo-1624880357913-a8539238245b?q=80&w=1000&auto=format&fit=crop",
         name: "NBA Finals",
+        link: "/experiences/basketball/nba-finals"
     },
 ];
 
@@ -63,6 +70,21 @@ export default function ExperiencesPage() {
         return () => clearInterval(timer);
     }, []);
 
+    /* --- Hero Animation --- */
+    const heroTextRef = useRef<HTMLParagraphElement>(null);
+
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            if (heroTextRef.current) {
+                gsap.fromTo(heroTextRef.current,
+                    { y: 100, opacity: 0, visibility: 'hidden' },
+                    { y: 0, opacity: 1, visibility: 'visible', duration: 1, ease: 'power3.out', delay: 0.1 }
+                );
+            }
+        });
+        return () => ctx.revert();
+    }, []);
+
     return (
         <main className="bg-black text-white overflow-hidden">
             {/* ================= HERO ================= */}
@@ -78,7 +100,7 @@ export default function ExperiencesPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black" />
 
                 <div className="relative z-10 flex min-h-screen items-center px-10 md:px-20 max-w-3xl">
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <p ref={heroTextRef} className="text-sm text-gray-300 leading-relaxed opacity-0 invisible">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                         when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -92,95 +114,130 @@ export default function ExperiencesPage() {
 
             {/* ================= TRENDING TOURNAMENTS (UPDATED) ================= */}
             <section className="relative z-20 -mt-32 px-10 md:px-20 pb-24">
-                <input
-                    placeholder="Search event"
-                    className="mb-8 max-w-md w-full rounded-md bg-gray-800/80 px-4 py-3 text-sm outline-none"
-                />
+                <div className="mb-6">
+                    <AnimatedContent
+                        distance={100}
+                        direction="vertical"
+                        duration={1}
+                        ease="power3.out"
+                        delay={0.1}
+                    >
+                        <h2 className="text-xl sm:text-3xl font-normal text-left flex items-center gap-4 mb-8">
+                            Trending <span className="text-[#D4AF37]">Tournaments</span>
+                            <div className="h-[4px] w-24 bg-[#D4AF37] mt-2"></div>
+                        </h2>
+                    </AnimatedContent>
+                </div>
 
-                <h3 className="mb-6 text-lg font-semibold">Trending tournaments</h3>
-
-                <Carousel.Root
-                    page={currentIndex}
-                    onPageChange={(d: any) => setCurrentIndex(d.page)}
-                    slideCount={trendingTournaments.length}
-                    loop
-                    className="w-full"
+                <AnimatedContent
+                    distance={100}
+                    direction="vertical"
+                    duration={1}
+                    ease="power3.out"
+                    delay={0.3}
                 >
-                    <Carousel.ItemGroup className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
-                        {trendingTournaments.map((item, index) => (
-                            <Carousel.Item key={index} index={index}>
-                                <div className="relative w-full h-[420px] sm:h-[520px] lg:h-[620px]">
-                                    <img
-                                        src={item.src}
-                                        alt={item.name}
-                                        className="w-full h-full object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-8">
-                                        <h3 className="text-2xl md:text-4xl font-normal">
-                                            {item.name}
-                                        </h3>
-                                    </div>
-                                </div>
-                            </Carousel.Item>
-                        ))}
-                    </Carousel.ItemGroup>
+                    <Carousel.Root
+                        page={currentIndex}
+                        onPageChange={(d: any) => setCurrentIndex(d.page)}
+                        slideCount={trendingTournaments.length}
+                        loop
+                        className="w-full"
+                    >
+                        <Carousel.ItemGroup className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+                            {trendingTournaments.map((item, index) => (
+                                <Carousel.Item key={index} index={index}>
+                                    <Link href={item.link} className="block relative w-full h-[420px] sm:h-[520px] lg:h-[620px]">
+                                        <img
+                                            src={item.src}
+                                            alt={item.name}
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-8">
+                                            <h3 className="text-2xl md:text-4xl font-normal">
+                                                {item.name}
+                                            </h3>
+                                        </div>
+                                    </Link>
+                                </Carousel.Item>
+                            ))}
+                        </Carousel.ItemGroup>
 
-                    <Carousel.IndicatorGroup className="flex justify-center gap-2 mt-4">
-                        {trendingTournaments.map((_, i) => (
-                            <Carousel.Indicator
-                                key={i}
-                                index={i}
-                                className="w-2 h-2 rounded-full bg-gray-500 data-current:bg-[#D4AF37]"
-                            />
-                        ))}
-                    </Carousel.IndicatorGroup>
-                </Carousel.Root>
+                        <Carousel.IndicatorGroup className="flex justify-center gap-2 mt-4">
+                            {trendingTournaments.map((_, i) => (
+                                <Carousel.Indicator
+                                    key={i}
+                                    index={i}
+                                    className="w-2 h-2 rounded-full bg-gray-500 data-current:bg-[#D4AF37]"
+                                />
+                            ))}
+                        </Carousel.IndicatorGroup>
+                    </Carousel.Root>
+                </AnimatedContent>
             </section>
 
             {/* ================= CATEGORY OF SPORTS ================= */}
             <section className="relative py-24">
-                <h2 className="text-xl font-light pl-16 mb-8">
-                    category of sports
-                </h2>
+                <AnimatedContent
+                    distance={100}
+                    direction="vertical"
+                    duration={1}
+                    ease="power3.out"
+                    delay={0.1}
+                >
+                    <h2 className="text-xl sm:text-3xl font-normal text-left pl-16 mb-8 flex items-center gap-4">
+                        Category of <span className="text-[#D4AF37]">Sports</span>
+                        <div className="h-[4px] w-24 bg-[#D4AF37] mt-2"></div>
+                    </h2>
+                </AnimatedContent>
 
-                <Button size="icon" onClick={() => scroll("left")} className="absolute left-6 top-1/2 z-30 bg-black/50">
-                    <ArrowLeft />
-                </Button>
-                <Button size="icon" onClick={() => scroll("right")} className="absolute right-6 top-1/2 z-30 bg-black/50">
-                    <ArrowRight />
-                </Button>
+                <AnimatedContent
+                    distance={100}
+                    direction="vertical"
+                    duration={1}
+                    ease="power3.out"
+                    delay={0.3}
+                >
+                    <div className="relative">
+                        <Button size="icon" onClick={() => scroll("left")} className="absolute left-6 top-1/2 -translate-y-1/2 z-30 bg-black/50">
+                            <ArrowLeft />
+                        </Button>
+                        <Button size="icon" onClick={() => scroll("right")} className="absolute right-6 top-1/2 -translate-y-1/2 z-30 bg-black/50">
+                            <ArrowRight />
+                        </Button>
 
-                <div className="overflow-hidden">
-                    <div
-                        ref={containerRef}
-                        style={{ transform: `translateX(-${offset}px)` }}
-                        className="relative w-[1300px] h-[700px] transition-transform duration-500 mx-auto"
-                    >
-                        {sportsItems.map((sport, i) => (
-                            <Link
-                                key={sport.id}
-                                href={sport.link}
-                                className={`absolute rounded-xl overflow-hidden group
-                  ${i === 0 ? "top-20 left-10 w-60 h-80" :
-                                        i === 1 ? "top-10 left-80 w-80 h-60" :
-                                            i === 2 ? "top-80 left-80 w-60 h-80" :
-                                                i === 3 ? "top-5 left-[720px] w-60 h-80" :
-                                                    i === 4 ? "top-[360px] left-[640px] w-80 h-60" :
-                                                        "top-[200px] left-[1000px] w-60 h-80"}`}
+                        <div className="overflow-hidden">
+                            <div
+                                ref={containerRef}
+                                style={{ transform: `translateX(-${offset}px)` }}
+                                className="relative w-[1300px] h-[700px] transition-transform duration-500 mx-auto"
                             >
-                                <img
-                                    src={sport.img}
-                                    alt={sport.title}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                                <h3 className="absolute bottom-4 left-4 text-2xl">
-                                    {sport.title}
-                                </h3>
-                            </Link>
-                        ))}
+                                {sportsItems.map((sport, i) => (
+                                    <Link
+                                        key={sport.id}
+                                        href={sport.link}
+                                        className={`absolute rounded-xl overflow-hidden group
+                      ${i === 0 ? "top-20 left-10 w-60 h-80" :
+                                                i === 1 ? "top-10 left-80 w-80 h-60" :
+                                                    i === 2 ? "top-80 left-80 w-60 h-80" :
+                                                        i === 3 ? "top-5 left-[720px] w-60 h-80" :
+                                                            i === 4 ? "top-[360px] left-[640px] w-80 h-60" :
+                                                                "top-[200px] left-[1000px] w-60 h-80"}`}
+                                    >
+                                        <img
+                                            src={sport.img}
+                                            alt={sport.title}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                                        <h3 className="absolute bottom-4 left-4 text-2xl">
+                                            {sport.title}
+                                        </h3>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </AnimatedContent>
             </section>
         </main>
     );

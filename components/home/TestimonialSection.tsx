@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Star, Quote } from 'lucide-react'
 import Image from 'next/image'
+import AnimatedContent from './AnimatedContent'
 
 const testimonials = [
     {
@@ -55,7 +56,7 @@ export default function TestimonialSection() {
     const activeTestimonial = testimonials[activeDataIndex];
 
     return (
-        <section className="py-20 bg-black text-white overflow-hidden relative">
+        <section className="py-20 text-white overflow-hidden relative">
             {/* Background Elements */}
             <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#D4AF37]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
 
@@ -64,92 +65,117 @@ export default function TestimonialSection() {
 
                     {/* Left Side: Content */}
                     <div className="w-full lg:w-3/5 flex flex-col items-start z-20">
-                        <div className="flex items-center gap-4 mb-20">
-                            <h2 className="text-2xl sm:text-4xl font-light">Testimonials</h2>
-                            <div className="h-[2px] w-16 bg-[#D4AF37]"></div>
-                        </div>
+                        <AnimatedContent
+                            distance={100}
+                            direction="vertical"
+                            duration={1}
+                            ease="power3.out"
+                            delay={0.1}
+                        >
+                            <div className="flex items-center gap-4 mb-20">
+                                <h2 className="text-2xl sm:text-4xl font-light">Testimonials</h2>
+                                <div className="h-[2px] w-16 bg-[#D4AF37]"></div>
+                            </div>
+                        </AnimatedContent>
 
-                        <div className="min-h-[300px] transition-all duration-500 ease-in-out">
-                            <Quote className="w-12 h-12 text-[#D4AF37] mb-6 opacity-50" />
+                        <AnimatedContent
+                            distance={100}
+                            direction="vertical"
+                            duration={1}
+                            ease="power3.out"
+                            delay={0.3}
+                        >
+                            <div className="min-h-[300px] transition-all duration-500 ease-in-out">
+                                <Quote className="w-12 h-12 text-[#D4AF37] mb-6 opacity-50" />
 
-                            <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 italic animate-in fade-in slide-in-from-bottom-2 duration-500" key={activeDataIndex}>
-                                "{activeTestimonial.text}"
-                            </p>
+                                <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 italic animate-in fade-in slide-in-from-bottom-2 duration-500" key={activeDataIndex}>
+                                    "{activeTestimonial.text}"
+                                </p>
 
-                            <div className="flex items-center gap-4">
-                                <div>
-                                    <h3 className="text-xl font-semibold text-white">{activeTestimonial.name}</h3>
-                                    <p className="text-[#D4AF37] text-sm">{activeTestimonial.role}</p>
-                                </div>
-                                <div className="flex gap-1 ml-4">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star
-                                            key={i}
-                                            className={`w-4 h-4 ${i < activeTestimonial.rating ? 'fill-[#D4AF37] text-[#D4AF37]' : 'text-gray-600'}`}
-                                        />
-                                    ))}
+                                <div className="flex items-center gap-4">
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-white">{activeTestimonial.name}</h3>
+                                        <p className="text-[#D4AF37] text-sm">{activeTestimonial.role}</p>
+                                    </div>
+                                    <div className="flex gap-1 ml-4">
+                                        {[...Array(5)].map((_, i) => (
+                                            <Star
+                                                key={i}
+                                                className={`w-4 h-4 ${i < activeTestimonial.rating ? 'fill-[#D4AF37] text-[#D4AF37]' : 'text-gray-600'}`}
+                                            />
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </AnimatedContent>
                     </div>
 
                     {/* Right Side: Visuals */}
-                    <div className="hidden lg:flex w-full lg:w-2/5 relative h-[600px] items-center justify-end overflow-visible">
-                        {/* Orbiting Images Container - Positioned to the right */}
-                        <div className="relative w-[800px] h-[800px] flex-shrink-0 aspect-square translate-x-1/2">
+                    <AnimatedContent
+                        distance={100}
+                        direction="vertical"
+                        duration={1}
+                        ease="power3.out"
+                        delay={0.5}
+                        className="hidden lg:flex w-full lg:w-2/5 relative h-[600px] items-center justify-end overflow-visible"
+                    >
+                        <div className="hidden lg:flex w-full relative h-full items-center justify-end overflow-visible">
+                            {/* Orbiting Images Container - Positioned to the right */}
+                            <div className="relative w-[800px] h-[800px] flex-shrink-0 aspect-square translate-x-1/2">
 
-                            {/* Central Background Circle (Gold Curve) */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[660px] h-[660px] rounded-full border-2 border-[#D4AF37] bg-black shadow-[0_0_120px_rgba(212,175,55,0.3)] z-0"></div>
+                                {/* Central Background Circle (Gold Curve) */}
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[660px] h-[660px] rounded-full border-2 border-[#D4AF37] bg-black shadow-[0_0_120px_rgba(212,175,55,0.3)] z-0"></div>
 
-                            {/* Orbiting Images */}
-                            {testimonials.map((testimonial, index) => {
-                                const total = testimonials.length;
+                                {/* Orbiting Images */}
+                                {testimonials.map((testimonial, index) => {
+                                    const total = testimonials.length;
 
-                                // We want the system to rotate so active is always at 0 degrees (left side relative to the circle center, pointing towards content).
-                                // Actually, typically in these designs, the "active" item is facing the content.
-                                // If the circle is on the right, the content is on the left. So active item should be near 180 degrees (Left) or similar?
-                                // Let's stick to the rotation logic but adjust positions.
+                                    // We want the system to rotate so active is always at 0 degrees (left side relative to the circle center, pointing towards content).
+                                    // Actually, typically in these designs, the "active" item is facing the content.
+                                    // If the circle is on the right, the content is on the left. So active item should be near 180 degrees (Left) or similar?
+                                    // Let's stick to the rotation logic but adjust positions.
 
-                                // Revert to even 360 degree distribution for continuous loop
-                                const step = (2 * Math.PI) / total;
-                                const angle = (index - activeIndex) * step + Math.PI;
+                                    // Revert to even 360 degree distribution for continuous loop
+                                    const step = (2 * Math.PI) / total;
+                                    const angle = (index - activeIndex) * step + Math.PI;
 
-                                // Position math
-                                const radius = 330; // Reduced to 330 to fit inside container without clipping
-                                const x = Math.cos(angle) * radius;
-                                const y = Math.sin(angle) * radius;
+                                    // Position math
+                                    const radius = 330; // Reduced to 330 to fit inside container without clipping
+                                    const x = Math.cos(angle) * radius;
+                                    const y = Math.sin(angle) * radius;
 
-                                // Check if this item is currently the "active" one based on modulo math
-                                const activeDataIndex = activeIndex % testimonials.length;
-                                // Fix modulo for negative numbers if activeIndex keeps increasing, positive is fine.
-                                const isActive = (index === activeDataIndex);
+                                    // Check if this item is currently the "active" one based on modulo math
+                                    const activeDataIndex = activeIndex % testimonials.length;
+                                    // Fix modulo for negative numbers if activeIndex keeps increasing, positive is fine.
+                                    const isActive = (index === activeDataIndex);
 
-                                return (
-                                    <div
-                                        key={testimonial.id}
-                                        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-in-out`}
-                                        style={{
-                                            transform: `translate(${x}px, ${y}px) scale(${isActive ? 1.5 : 0.8})`,
-                                            zIndex: isActive ? 20 : 10,
-                                            opacity: isActive ? 1 : 0.5
-                                        }}
-                                    >
-                                        <div className={`relative rounded-full overflow-hidden border-4 ${isActive ? 'border-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.4)]' : 'border-gray-600'}`}>
-                                            <div className="w-32 h-32 bg-gray-800">
-                                                <Image
-                                                    src={testimonial.image}
-                                                    alt={testimonial.name}
-                                                    width={128}
-                                                    height={128}
-                                                    className="w-full h-full object-cover"
-                                                />
+                                    return (
+                                        <div
+                                            key={testimonial.id}
+                                            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-in-out`}
+                                            style={{
+                                                transform: `translate(${x}px, ${y}px) scale(${isActive ? 1.5 : 0.8})`,
+                                                zIndex: isActive ? 20 : 10,
+                                                opacity: isActive ? 1 : 0.5
+                                            }}
+                                        >
+                                            <div className={`relative rounded-full overflow-hidden border-4 ${isActive ? 'border-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.4)]' : 'border-gray-600'}`}>
+                                                <div className="w-32 h-32 bg-gray-800">
+                                                    <Image
+                                                        src={testimonial.image}
+                                                        alt={testimonial.name}
+                                                        width={128}
+                                                        height={128}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
+                                    )
+                                })}
+                            </div>
                         </div>
-                    </div>
+                    </AnimatedContent>
 
                 </div>
             </div>

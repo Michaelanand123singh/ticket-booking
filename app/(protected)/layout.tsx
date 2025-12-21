@@ -9,8 +9,8 @@ import AuthGuard from "@/components/shared/AuthGuard";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Dashboard - TicketHub",
-    description: "Manage your tickets and account.",
+    title: "Dashboard - Viagosport",
+    description: "Manage your sports experiences and account.",
 };
 
 export default function ProtectedLayout({

@@ -1,4 +1,7 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useRef } from 'react'
+import Image from 'next/image'
+import { gsap } from 'gsap'
 
 interface SportHeroProps {
     sport: string
@@ -10,6 +13,27 @@ interface SportHeroProps {
 export default function SportHero({ sport, description, heroImage, cardImage }: SportHeroProps) {
     // Use cardImage if provided, otherwise fallback to heroImage
     const displayCardImage = cardImage || heroImage
+    const titleRef = useRef<HTMLHeadingElement>(null)
+    const descRef = useRef<HTMLParagraphElement>(null)
+
+    useEffect(() => {
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } })
+
+        if (titleRef.current) {
+            tl.fromTo(titleRef.current,
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, delay: 0.1 }
+            )
+        }
+
+        if (descRef.current) {
+            tl.fromTo(descRef.current,
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1 },
+                "-=0.8" // Overlap slightly
+            )
+        }
+    }, [])
 
     return (
         <div className="relative w-full min-h-screen flex items-center overflow-hidden bg-black">
@@ -41,10 +65,13 @@ export default function SportHero({ sport, description, heroImage, cardImage }: 
 
                     {/* Text Content */}
                     <div className="flex-grow text-center md:text-left">
-                        <h1 className="text-2xl md:text-4xl font-normal text-white mb-20 capitalize tracking-tight">
-                            {sport}
+                        <h1 ref={titleRef} className="text-2xl md:text-4xl font-normal capitalize tracking-tighter mb-6 relative z-10 w-full break-words leading-[0.9]">
+                            <span>
+                                {sport}
+                            </span>
                         </h1>
-                        <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-2xl mb-10">
+
+                        <p ref={descRef} className="text-sm md:text-base lg:text-lg text-gray-300 max-w-xl leading-relaxed backdrop-blur-sm bg-black/10 p-4 rounded-xl border-l-2 border-[#D4AF37]">
                             {description}
                         </p>
                     </div>

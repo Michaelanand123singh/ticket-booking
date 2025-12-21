@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import AnimatedContent from './AnimatedContent'
 
 interface AthleteSelectionProps {
     activeType?: 'professional' | 'recreational';
@@ -45,54 +46,70 @@ export default function AthleteSelection({ activeType, variant = 'default', show
     );
 
     return (
-        <section className={`${isStatic ? 'pt-36 pb-0' : 'py-16'} bg-black text-white relative overflow-x-hidden`}>
+        <section className={`${isStatic ? 'pt-36 pb-0' : 'py-16'} text-white relative overflow-x-hidden`}>
             <div className="container mx-auto px-4 min-[425px]:px-12 relative z-20">
                 {/* Heading */}
                 {!isStatic && (
-                    <h2 className="text-2xl sm:text-4xl font-normal text-left flex items-center gap-4 mb-12">
-                        Athlete
-                        <div className="h-[4px] w-24 bg-[#D4AF37] mt-2"></div>
-                    </h2>
+                    <AnimatedContent
+                        distance={100}
+                        direction="vertical"
+                        duration={1}
+                        ease="power3.out"
+                        delay={0.1}
+                    >
+                        <h2 className="text-2xl sm:text-4xl font-normal text-left flex items-center gap-4 mb-12">
+                            Athlete
+                            <div className="h-[4px] w-24 bg-[#D4AF37] mt-2"></div>
+                        </h2>
+                    </AnimatedContent>
                 )}
 
                 {/* Content */}
-                <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 md:gap-24 w-full">
+                <AnimatedContent
+                    distance={100}
+                    direction="vertical"
+                    duration={1}
+                    ease="power3.out"
+                    delay={0.3}
+                >
+                    <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 md:gap-24 w-full">
 
-                    {/* Professional */}
-                    {onTypeSelect ? (
-                        <div onClick={() => onTypeSelect('professional')} className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl">
-                            <CardContent type="professional" isActive={isProfessionalActive} />
-                        </div>
-                    ) : (
-                        isStatic ? (
-                            <div className="flex flex-col items-center w-full md:flex-1 max-w-2xl">
+                        {/* Professional */}
+                        {onTypeSelect ? (
+                            <div onClick={() => onTypeSelect('professional')} className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl">
                                 <CardContent type="professional" isActive={isProfessionalActive} />
                             </div>
                         ) : (
-                            <Link href="/atheletes?type=professional" className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl">
-                                <CardContent type="professional" isActive={isProfessionalActive} />
-                            </Link>
-                        )
-                    )}
+                            isStatic ? (
+                                <div className="flex flex-col items-center w-full md:flex-1 max-w-2xl">
+                                    <CardContent type="professional" isActive={isProfessionalActive} />
+                                </div>
+                            ) : (
+                                <Link href="/atheletes?type=professional" className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl">
+                                    <CardContent type="professional" isActive={isProfessionalActive} />
+                                </Link>
+                            )
+                        )}
 
-                    {/* Recreational */}
-                    {onTypeSelect ? (
-                        <div onClick={() => onTypeSelect('recreational')} className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl mt-12 md:mt-0">
-                            <CardContent type="recreational" isActive={isRecreationalActive} />
-                        </div>
-                    ) : (
-                        isStatic ? (
-                            <div className="flex flex-col items-center w-full md:flex-1 max-w-2xl mt-12 md:mt-0 pointer-events-none">
+                        {/* Recreational */}
+                        {onTypeSelect ? (
+                            <div onClick={() => onTypeSelect('recreational')} className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl mt-12 md:mt-0">
                                 <CardContent type="recreational" isActive={isRecreationalActive} />
                             </div>
                         ) : (
-                            <Link href="/atheletes?type=recreational" className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl mt-12 md:mt-0">
-                                <CardContent type="recreational" isActive={isRecreationalActive} />
-                            </Link>
-                        )
-                    )}
+                            isStatic ? (
+                                <div className="flex flex-col items-center w-full md:flex-1 max-w-2xl mt-12 md:mt-0 pointer-events-none">
+                                    <CardContent type="recreational" isActive={isRecreationalActive} />
+                                </div>
+                            ) : (
+                                <Link href="/atheletes?type=recreational" className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl mt-12 md:mt-0">
+                                    <CardContent type="recreational" isActive={isRecreationalActive} />
+                                </Link>
+                            )
+                        )}
 
-                </div>
+                    </div>
+                </AnimatedContent>
             </div>
         </section>
     )

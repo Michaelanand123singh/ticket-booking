@@ -1,4 +1,5 @@
 import React from 'react'
+import AnimatedContent from './AnimatedContent'
 
 const offers = [
     {
@@ -29,17 +30,33 @@ const offers = [
 
 export default function WhatWeOffer() {
     return (
-        <section className="py-16 bg-background text-foreground relative">
+        <section className="py-16 text-foreground relative">
             <div className="container mx-auto px-4 min-[425px]:px-12 relative z-20">
-                <h2 className="text-2xl sm:text-4xl font-normal text-left mb-12">Who we <span className="text-[#D4AF37]">are</span></h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                    {offers.map((offer, index) => (
-                        <div key={index} className="p-6 rounded-lg bg-white text-black">
-                            <h3 className="text-xl font-normal mb-3">{offer.title}</h3>
-                            <p className="text-sm text-gray-600">{offer.description}</p>
-                        </div>
-                    ))}
-                </div>
+                <AnimatedContent
+                    distance={100}
+                    direction="vertical"
+                    duration={1}
+                    ease="power3.out"
+                    delay={0.1}
+                >
+                    <h2 className="text-2xl sm:text-4xl font-normal text-left mb-12">Who we <span className="text-[#D4AF37]">are</span></h2>
+                </AnimatedContent>
+                <AnimatedContent
+                    distance={100}
+                    direction="vertical"
+                    duration={1}
+                    ease="power3.out"
+                    delay={0.3}
+                >
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                        {offers.map((offer, index) => (
+                            <div key={index} className="p-6 rounded-lg bg-white text-black">
+                                <h3 className="text-xl font-normal mb-3">{offer.title}</h3>
+                                <p className="text-sm text-gray-600">{offer.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </AnimatedContent>
             </div>
         </section>
     )
