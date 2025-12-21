@@ -9,9 +9,9 @@ import Toaster from "@/components/ui/Toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TicketHub - Sports & Concert Ticket Booking",
-  description: "Book sports and concert tickets online. Fast, secure, and reliable ticket booking platform.",
-  keywords: "tickets, sports tickets, concert tickets, event tickets, booking",
+  title: "Viagosport - Premium Sports Experiences & Athlete Management",
+  description: "Book exclusive sports experiences, manage athlete profiles, and find events. Fast, secure, and reliable platform.",
+  keywords: "sports, experiences, athletes, events, booking, viagosport",
 };
 
 export default function RootLayout({

@@ -67,7 +67,7 @@ export default function BasicCarousel({ items }: TrendingTournamentsCarouselProp
 
   return (
     <div className="w-full relative">
-      <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent),linear-gradient(to_right,transparent,black_20%,black_80%,transparent)] [mask-composite:intersect] [-webkit-mask-composite:source-in]" ref={emblaRef}>
+      <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent),linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [mask-composite:intersect] [-webkit-mask-composite:source-in]" ref={emblaRef}>
         <div className="flex">
           {tournaments.map((tournament, index) => (
             <div className="flex-[0_0_100%] min-w-0 relative" key={index}>
