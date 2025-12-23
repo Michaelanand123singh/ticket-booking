@@ -1,5 +1,5 @@
 "use client"
-
+//this component is deprecated as of now
 import React, { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight } from 'lucide-react'

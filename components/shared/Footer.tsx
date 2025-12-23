@@ -48,12 +48,12 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4 text-[#D4AF37]">Athlete</h4>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <Link href="/atheletes/professional" className="hover:text-white transition-colors">
+                <Link href="/athlete/professional" className="hover:text-white transition-colors">
                   Professional
                 </Link>
               </li>
               <li>
-                <Link href="/atheletes/recreational" className="hover:text-white transition-colors">
+                <Link href="/athlete/recreational" className="hover:text-white transition-colors">
                   Recreational
                 </Link>
               </li>

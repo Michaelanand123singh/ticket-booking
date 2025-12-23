@@ -59,6 +59,7 @@ export default function HeroJourneyLine() {
                     strokeWidth="1"
                     strokeLinecap="round"
                     filter="url(#glow)"
+                    opacity="0"
                 />
             </svg>
         </div>

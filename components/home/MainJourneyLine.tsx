@@ -66,6 +66,7 @@ export default function MainJourneyLine() {
                     strokeWidth="0.6"
                     strokeLinecap="round"
                     filter="url(#main-glow)"
+                    opacity="0"
                 />
             </svg>
         </div>

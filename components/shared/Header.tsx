@@ -88,7 +88,7 @@ export default function Header() {
               </div>
               {/* Athlete Link - No Dropdown */}
               <Link
-                href="/atheletes"
+                href="/athlete"
                 className="text-white hover:text-white/80 font-normal text-sm transition-colors"
               >
                 Athlete
@@ -182,7 +182,7 @@ export default function Header() {
                   </div>
                 </div>
                 <Link
-                  href="/atheletes"
+                  href="/athlete"
                   className="text-lg font-semibold text-white"
                   onClick={() => setMobileMenuOpen(false)}
                 >

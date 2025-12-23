@@ -2,7 +2,7 @@ import { recreationalEvents } from '@/lib/data'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import Itinerary from '@/components/atheletes/Itinerary'
+import Itinerary from '@/components/athlete/Itinerary'
 
 export async function generateStaticParams() {
     return recreationalEvents.map((event) => ({
@@ -19,7 +19,7 @@ export default async function RecreationalEventPage({ params }: { params: Promis
             <div className="min-h-screen bg-black text-white flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-4xl font-bold mb-4">Event Not Found</h1>
-                    <Link href="/atheletes?type=recreational" className="text-[#D4AF37] hover:underline">
+                    <Link href="/athlete?type=recreational" className="text-[#D4AF37] hover:underline">
                         Return to Athletes
                     </Link>
                 </div>
@@ -49,7 +49,7 @@ export default async function RecreationalEventPage({ params }: { params: Promis
 
                 <div className="relative z-10 container mx-auto px-[5%] pb-24">
                     <Link
-                        href="/atheletes?type=recreational"
+                        href="/athlete?type=recreational"
                         className="inline-flex items-center gap-2 text-white/80 hover:text-[#D4AF37] transition-colors mb-8 text-sm uppercase tracking-widest bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10"
                     >
                         <ArrowLeft className="w-4 h-4" />
