@@ -18,7 +18,7 @@ export default function AthleteSelection({ activeType, variant = 'default', show
 
     const CardContent = ({ type, isActive }: { type: 'professional' | 'recreational', isActive: boolean }) => (
         <>
-            <div className={`relative w-full h-[300px] md:h-[500px] transition-all duration-1000 ease-out rounded-3xl ${isActive ? 'shadow-[0_0_150px_rgba(212,175,55,0.2)]' : (isStatic && !onTypeSelect ? '' : 'group-hover:shadow-[0_0_150px_rgba(212,175,55,0.2)]')}`}>
+            <div className={`relative w-full h-[150px] md:h-[500px] transition-all duration-1000 ease-out rounded-3xl ${isActive ? 'shadow-[0_0_150px_rgba(212,175,55,0.2)]' : (isStatic && !onTypeSelect ? '' : 'group-hover:shadow-[0_0_150px_rgba(212,175,55,0.2)]')}`}>
                 {/* Card Background / Blur Effect */}
                 <div className={`absolute -inset-8 bg-gradient-to-r from-[#D4AF37] to-[#AA8C2C] rounded-[3rem] blur-2xl transition duration-1000 ${isActive ? 'opacity-15' : (isStatic && !onTypeSelect ? 'opacity-0' : 'opacity-0 group-hover:opacity-15')}`}></div>
 
@@ -38,7 +38,7 @@ export default function AthleteSelection({ activeType, variant = 'default', show
                 </div>
             </div>
             {shouldShowLabels && (
-                <h3 className="text-[#D4AF37] text-2xl sm:text-3xl font-normal mt-6 tracking-wide">
+                <h3 className="text-[#D4AF37] text-lg sm:text-3xl font-normal mt-4 md:mt-6 tracking-wide text-center">
                     {type === 'professional' ? 'Professional' : 'Recreational'}
                 </h3>
             )}
@@ -46,7 +46,7 @@ export default function AthleteSelection({ activeType, variant = 'default', show
     );
 
     return (
-        <section className={`${isStatic ? 'pt-36 pb-0' : 'py-16'} text-white relative overflow-x-hidden`}>
+        <section className={`${isStatic ? 'pt-36 pb-0' : 'py-16'} text-white relative overflow-hidden`}>
             <div className="container mx-auto px-4 min-[425px]:px-12 relative z-20">
                 {/* Heading */}
                 {!isStatic && (
@@ -72,20 +72,20 @@ export default function AthleteSelection({ activeType, variant = 'default', show
                     ease="power3.out"
                     delay={0.3}
                 >
-                    <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 md:gap-24 w-full">
+                    <div className="flex flex-row justify-center items-center md:items-start gap-4 md:gap-24 w-full">
 
                         {/* Professional */}
                         {onTypeSelect ? (
-                            <div onClick={() => onTypeSelect('professional')} className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl">
+                            <div onClick={() => onTypeSelect('professional')} className="group cursor-pointer flex flex-col items-center flex-1 max-w-[45%] md:max-w-2xl">
                                 <CardContent type="professional" isActive={isProfessionalActive} />
                             </div>
                         ) : (
                             isStatic ? (
-                                <div className="flex flex-col items-center w-full md:flex-1 max-w-2xl">
+                                <div className="flex flex-col items-center flex-1 max-w-[45%] md:max-w-2xl">
                                     <CardContent type="professional" isActive={isProfessionalActive} />
                                 </div>
                             ) : (
-                                <Link href="/atheletes?type=professional" className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl">
+                                <Link href="/athlete?type=professional" className="group cursor-pointer flex flex-col items-center flex-1 max-w-[45%] md:max-w-2xl">
                                     <CardContent type="professional" isActive={isProfessionalActive} />
                                 </Link>
                             )
@@ -93,16 +93,16 @@ export default function AthleteSelection({ activeType, variant = 'default', show
 
                         {/* Recreational */}
                         {onTypeSelect ? (
-                            <div onClick={() => onTypeSelect('recreational')} className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl mt-12 md:mt-0">
+                            <div onClick={() => onTypeSelect('recreational')} className="group cursor-pointer flex flex-col items-center flex-1 max-w-[45%] md:max-w-2xl">
                                 <CardContent type="recreational" isActive={isRecreationalActive} />
                             </div>
                         ) : (
                             isStatic ? (
-                                <div className="flex flex-col items-center w-full md:flex-1 max-w-2xl mt-12 md:mt-0 pointer-events-none">
+                                <div className="flex flex-col items-center flex-1 max-w-[45%] md:max-w-2xl pointer-events-none">
                                     <CardContent type="recreational" isActive={isRecreationalActive} />
                                 </div>
                             ) : (
-                                <Link href="/atheletes?type=recreational" className="group cursor-pointer flex flex-col items-center w-full md:flex-1 max-w-2xl mt-12 md:mt-0">
+                                <Link href="/athlete?type=recreational" className="group cursor-pointer flex flex-col items-center flex-1 max-w-[45%] md:max-w-2xl">
                                     <CardContent type="recreational" isActive={isRecreationalActive} />
                                 </Link>
                             )

@@ -8,7 +8,7 @@ export default function RecreationalEvents() {
             <div className="container mx-auto px-4 min-[425px]:px-12 relative z-10">
                 <div className="flex flex-col gap-24">
                     {recreationalEvents.map((event) => (
-                        <Link href={`/atheletes/recreational/${event.id}`} key={event.id} className="group block">
+                        <Link href={`/athlete/recreational/${event.id}`} key={event.id} className="group block">
                             <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 transition-all duration-300 group-hover:bg-white/5 rounded-3xl p-4 md:p-8">
                                 {/* Left: Image */}
                                 <div className="w-full md:w-1/2 relative">

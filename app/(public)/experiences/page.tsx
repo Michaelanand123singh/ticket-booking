@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { gsap } from "gsap";
 import AnimatedContent from "@/components/home/AnimatedContent";
+import ProfessionalEvents from "@/components/athlete/ProfessionalEvents";
 
 /* ===================== DATA ===================== */
 
@@ -190,54 +191,7 @@ export default function ExperiencesPage() {
                     </h2>
                 </AnimatedContent>
 
-                <AnimatedContent
-                    distance={100}
-                    direction="vertical"
-                    duration={1}
-                    ease="power3.out"
-                    delay={0.3}
-                >
-                    <div className="relative">
-                        <Button size="icon" onClick={() => scroll("left")} className="absolute left-6 top-1/2 -translate-y-1/2 z-30 bg-black/50">
-                            <ArrowLeft />
-                        </Button>
-                        <Button size="icon" onClick={() => scroll("right")} className="absolute right-6 top-1/2 -translate-y-1/2 z-30 bg-black/50">
-                            <ArrowRight />
-                        </Button>
-
-                        <div className="overflow-hidden">
-                            <div
-                                ref={containerRef}
-                                style={{ transform: `translateX(-${offset}px)` }}
-                                className="relative w-[1300px] h-[700px] transition-transform duration-500 mx-auto"
-                            >
-                                {sportsItems.map((sport, i) => (
-                                    <Link
-                                        key={sport.id}
-                                        href={sport.link}
-                                        className={`absolute rounded-xl overflow-hidden group
-                      ${i === 0 ? "top-20 left-10 w-60 h-80" :
-                                                i === 1 ? "top-10 left-80 w-80 h-60" :
-                                                    i === 2 ? "top-80 left-80 w-60 h-80" :
-                                                        i === 3 ? "top-5 left-[720px] w-60 h-80" :
-                                                            i === 4 ? "top-[360px] left-[640px] w-80 h-60" :
-                                                                "top-[200px] left-[1000px] w-60 h-80"}`}
-                                    >
-                                        <img
-                                            src={sport.img}
-                                            alt={sport.title}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                                        <h3 className="absolute bottom-4 left-4 text-2xl">
-                                            {sport.title}
-                                        </h3>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </AnimatedContent>
+                <ProfessionalEvents />
             </section>
         </main>
     );

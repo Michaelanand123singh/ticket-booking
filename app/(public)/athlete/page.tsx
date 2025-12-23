@@ -3,8 +3,8 @@
 import React, { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import AthleteSelection from '@/components/home/AthleteSelection'
-import SportsCarousel from '@/components/atheletes/SportsCarousel'
-import RecreationalEvents from '@/components/atheletes/RecreationalEvents'
+import RecreationalEvents from '@/components/athlete/RecreationalEvents'
+import ProfessionalEvents from '@/components/athlete/ProfessionalEvents'
 
 function AtheletesContent() {
     const searchParams = useSearchParams()
@@ -26,9 +26,9 @@ function AtheletesContent() {
                 onTypeSelect={setActiveTab}
             />
 
-            <div className="mt-4 md:mt-12 relative z-10 pointer-events-auto">
+            <div className="mb-0 md:mb-56 mt-24 md:mt-12 relative z-0 pointer-events-auto">
                 {activeTab === 'professional' ? (
-                    <SportsCarousel hideHeading={true} />
+                    <ProfessionalEvents />
                 ) : (
                     <RecreationalEvents />
                 )}
