@@ -131,10 +131,10 @@ export default function ProfessionalEvents() {
     return (
         <div className="flex flex-col items-center justify-center min-h-auto md:min-h-[80vh] px-4 md:px-0 gap-10 md:gap-0 w-full" ref={containerRef}>
             {/* Top Row */}
-            <div className="flex flex-col md:flex-row gap-10 md:gap-10 justify-center flex-wrap items-center relative z-10 w-full">
+            <div className="flex flex-col md:flex-row gap-10 md:gap-10 xl:gap-24 justify-center flex-wrap items-center relative z-10 w-full">
 
                 {/* Left: Tennis */}
-                <div ref={leftCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 overflow-hidden rounded-2xl'>
+                <div ref={leftCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 lg:w-80 xl:w-96 2xl:w-[30rem] overflow-hidden rounded-2xl'>
                     <Link href="/experiences/tennis" className="block w-full h-full relative group">
                         <Image
                             src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?q=80&w=1000&auto=format&fit=crop"
@@ -149,7 +149,7 @@ export default function ProfessionalEvents() {
                 </div>
 
                 {/* Center: Football */}
-                <div ref={centerCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 overflow-hidden rounded-2xl'>
+                <div ref={centerCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 lg:w-80 xl:w-96 2xl:w-[30rem] overflow-hidden rounded-2xl'>
                     <Link href="/experiences/football" className="block w-full h-full relative group">
                         <Image
                             src="https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&q=80&w=1080"
@@ -164,7 +164,7 @@ export default function ProfessionalEvents() {
                 </div>
 
                 {/* Right: Cricket */}
-                <div ref={rightCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 overflow-hidden rounded-2xl'>
+                <div ref={rightCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 lg:w-80 xl:w-96 2xl:w-[30rem] overflow-hidden rounded-2xl'>
                     <Link href="/experiences/cricket" className="block w-full h-full relative group">
                         <Image
                             src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=1000&auto=format&fit=crop"
@@ -180,10 +180,10 @@ export default function ProfessionalEvents() {
             </div>
 
             {/* Bottom Row */}
-            <div className="flex flex-col md:flex-row gap-10 md:gap-10 justify-center flex-wrap items-center mt-10 md:mt-[-50px] relative z-20 w-full">
+            <div className="flex flex-col md:flex-row gap-10 md:gap-10 xl:gap-24 justify-center flex-wrap items-center mt-10 md:mt-[-50px] relative z-20 w-full">
 
                 {/* Bottom Left: Basketball */}
-                <div ref={bottomLeftCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 overflow-hidden rounded-2xl'>
+                <div ref={bottomLeftCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 lg:w-80 xl:w-96 2xl:w-[30rem] overflow-hidden rounded-2xl'>
                     <Link href="/experiences/basketball" className="block w-full h-full relative group">
                         <Image
                             src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=1080"
@@ -198,7 +198,7 @@ export default function ProfessionalEvents() {
                 </div>
 
                 {/* Bottom Right: Rugby */}
-                <div ref={bottomRightCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 overflow-hidden rounded-2xl'>
+                <div ref={bottomRightCardRef} className='relative h-[450px] w-full max-w-[350px] md:h-135 md:w-72 lg:w-80 xl:w-96 2xl:w-[30rem] overflow-hidden rounded-2xl'>
                     <Link href="/experiences/rugby" className="block w-full h-full relative group">
                         <Image
                             src="https://images.unsplash.com/photo-1628891890467-b79f2c8ba9dc?auto=format&fit=crop&q=80&w=1080"
