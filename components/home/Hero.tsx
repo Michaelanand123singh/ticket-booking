@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import heroImage from '@/public/images/freepik__35mm-film-photography-legend-player-emerging-from-__53997 1.jpg'
+import headerCutout from '@/public/images/header_cutout.png'
 import { motion } from 'framer-motion'
 import BlurText from '@/components/ui/BlurText'
 import HeroJourneyLine from '@/components/home/HeroJourneyLine'
@@ -26,6 +27,20 @@ export default function Hero() {
             </motion.div>
             <div className="absolute inset-0 bg-black/20" /> {/* Optional overlay for better text contrast if needed later */}
             <HeroJourneyLine />
+            <motion.div
+                className="absolute inset-0 z-15 pointer-events-none"
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 6, ease: "easeOut" }}
+            >
+                <Image
+                    src={headerCutout}
+                    alt="Hero Cutout"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+            </motion.div>
             <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
             <div className="w-full relative z-20 flex h-full flex-col justify-center items-end max-[375px]:items-center px-6 min-[425px]:px-12 md:px-12 text-white">
                 <div className="w-auto text-left max-[375px]:text-center flex flex-col gap-1 translate-y-16">
