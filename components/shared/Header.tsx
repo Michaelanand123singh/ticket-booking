@@ -36,7 +36,7 @@ export default function Header() {
   return (
     <header className={cn(
       "fixed top-0 w-full z-[100] transition-all duration-300",
-      (isScrolled || mobileMenuOpen) ? "bg-black/90 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-transparent"
+      (isScrolled || mobileMenuOpen) ? "bg-black/50 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-transparent"
     )}>
       <div className="container mx-auto px-4 min-[425px]:px-12 py-2">
 
@@ -125,7 +125,7 @@ export default function Header() {
       {/* Mobile Menu */}
       {
         mobileMenuOpen && (
-          <div className="md:hidden w-full border-t border-white/10 bg-black/95 backdrop-blur-xl h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="md:hidden w-full border-t border-white/10 bg-black/80 backdrop-blur-xl h-[calc(100vh-5rem)] overflow-y-auto">
             <div className="container mx-auto px-4 py-4">
               <nav className="flex flex-col space-y-6 mt-4">
                 <Link

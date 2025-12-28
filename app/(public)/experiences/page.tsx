@@ -91,8 +91,8 @@ export default function ExperiencesPage() {
             {/* ================= HERO ================= */}
             <section className="relative min-h-screen">
                 <Image
-                    src="https://images.unsplash.com/photo-1709389882434-f81ca82a21fb?q=80&w=1074"
-                    alt="Stadium"
+                    src="/images/experiences-header.png"
+                    alt="Experiences Header"
                     fill
                     priority
                     className="object-cover opacity-60"
@@ -123,9 +123,8 @@ export default function ExperiencesPage() {
                         ease="power3.out"
                         delay={0.1}
                     >
-                        <h2 className="text-xl sm:text-3xl font-normal text-left flex items-center gap-4 mb-8">
-                            Trending <span className="text-[#D4AF37]">Tournaments</span>
-                            <div className="h-[4px] w-24 bg-[#D4AF37] mt-2"></div>
+                        <h2 className="text-2xl sm:text-4xl font-normal text-left flex items-center gap-4 mb-8">
+                            Trending Tournaments
                         </h2>
                     </AnimatedContent>
                 </div>
@@ -168,7 +167,7 @@ export default function ExperiencesPage() {
                                 <Carousel.Indicator
                                     key={i}
                                     index={i}
-                                    className="w-2 h-2 rounded-full bg-gray-500 data-current:bg-[#D4AF37]"
+                                    className="w-2 h-2 rounded-full bg-gray-500 data-current:bg-white"
                                 />
                             ))}
                         </Carousel.IndicatorGroup>
@@ -185,9 +184,8 @@ export default function ExperiencesPage() {
                     ease="power3.out"
                     delay={0.1}
                 >
-                    <h2 className="text-xl sm:text-3xl font-normal text-left pl-16 mb-8 flex items-center gap-4">
-                        Category of <span className="text-[#D4AF37]">Sports</span>
-                        <div className="h-[4px] w-24 bg-[#D4AF37] mt-2"></div>
+                    <h2 className="text-2xl sm:text-4xl font-normal text-left pl-16 mb-8 flex items-center gap-4">
+                        Category of Sports
                     </h2>
                 </AnimatedContent>
 

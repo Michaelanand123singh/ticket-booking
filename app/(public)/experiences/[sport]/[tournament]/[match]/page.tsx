@@ -1,4 +1,6 @@
 import { Calendar, MapPin } from 'lucide-react'
+import Itinerary from '@/components/athlete/Itinerary'
+import ExperienceEnquiryForm from '@/components/experiences/ExperienceEnquiryForm'
 
 // Mock data generator for the match
 const getMatchData = (sport: string, tournament: string, matchId: string) => {
@@ -63,7 +65,25 @@ const getMatchData = (sport: string, tournament: string, matchId: string) => {
         ...matchData,
         // Ensure some fields are always present if mock data changes
         heroImage: matchData.heroImage || "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80&w=1920",
-        location: matchData.venue
+        location: matchData.venue,
+        itinerary: [
+            {
+                title: "Day 1 – You Arrive, We Take Over",
+                description: "Private pickup from the airport straight to your preferred hotel (riverfront, old city, or modern business district – you choose the vibe). Light city discovery based on your mood: Sabarmati riverfront stroll, quiet temple visit, or straight to local snacks and chai – you say how much you want to do, we dial the pace up or down. Evening suggestions tailored to you: simple local dinner, riverside café, or early night to reset for match day."
+            },
+            {
+                title: "Day 2 – Match Day, At Your Pace",
+                description: "Start with a relaxed breakfast or a pre-match vibe session. We handle your transfer to the stadium with premium access. Experience the match from your selected seats. Post-match, we ensure a smooth exit and transfer back to your hotel or a celebratory dinner spot."
+            },
+            {
+                title: "Day 3 – City, Food & Flex Time",
+                description: "Explore the city's hidden gems, culinary delights, or shopping districts. We provide a curated guide and private transport at your disposal. Whether you want a guided heritage tour or just want to wander the markets, the day is yours to design."
+            },
+            {
+                title: "Day 4 – Your Flex Day & Farewell",
+                description: "A leisurely start to the day. Last-minute souvenir shopping or a relaxing spa session before your private transfer to the airport. We ensure you leave with memories of a lifetime and zero stress."
+            }
+        ]
     }
 }
 
@@ -90,7 +110,7 @@ export default async function MatchPage({ params }: { params: Promise<{ sport: s
 
                 {/* Hero Content */}
                 <div className="relative z-10 container mx-auto px-4 pb-12 w-full">
-                    <div className="flex flex-col md:flex-row items-end md:items-center gap-6">
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
 
                         {/* Circular Logo */}
                         <div className="flex-shrink-0">
@@ -125,13 +145,13 @@ export default async function MatchPage({ params }: { params: Promise<{ sport: s
             </div>
 
             {/* Details Card Section */}
-            <div className="relative z-10 container mx-auto px-4 mt-8 pb-20">
-                <div className="bg-[#0f172a]/80 backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-2xl border border-white/5">
+            <div className="relative z-10 container mx-auto px-4 mt-8 pb-16">
+                <div className="bg-transparent backdrop-blur-none rounded-2xl p-8 md:p-12 border-0">
                     <div className="flex flex-col lg:flex-row gap-12">
 
                         {/* Left Column: Description */}
                         <div className="lg:w-2/3">
-                            <h2 className="text-2xl md:text-3xl font-medium text-white mb-2">
+                            <h2 className="text-2xl sm:text-4xl font-normal text-white mb-2">
                                 {data.title}
                             </h2>
                             <p className="text-gray-400 mb-8 text-sm">
@@ -161,6 +181,14 @@ export default async function MatchPage({ params }: { params: Promise<{ sport: s
                     </div>
                 </div>
             </div>
+
+            {/* Itinerary Section */}
+            <div className="mt-0">
+                <Itinerary items={data.itinerary} />
+            </div>
+
+            {/* Experience Enquiry Form */}
+            <ExperienceEnquiryForm />
 
         </div>
     )
