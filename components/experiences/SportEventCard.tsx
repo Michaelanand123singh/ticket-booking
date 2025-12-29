@@ -11,7 +11,7 @@ interface SportEventCardProps {
 
 export default function SportEventCard({ title, date, location, description, image }: SportEventCardProps) {
     return (
-        <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+        <div className="bg-[#11212D] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group">
             {/* Image Section */}
             <div className="relative h-48 overflow-hidden">
                 <img
@@ -31,8 +31,8 @@ export default function SportEventCard({ title, date, location, description, ima
 
                 {/* Text Content */}
                 <div className="flex-grow">
-                    <h3 className="text-gray-900 font-semibold text-base mb-1">{title}</h3>
-                    <p className="text-xs text-gray-500 mb-2 line-clamp-3">
+                    <h3 className="text-white font-semibold text-base mb-1">{title}</h3>
+                    <p className="text-gray-400 text-xs mb-2 line-clamp-3">
                         {description}
                     </p>
                 </div>

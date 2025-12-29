@@ -7,6 +7,8 @@ import { usePathname } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { cn } from "@/lib/utils"
+// import SignUpModal from '@/components/auth/SignUpModal' // Removing Modal import
+import SignUpDropdown from '@/components/auth/SignUpDropdown'
 
 
 export default function Header() {
@@ -15,6 +17,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [hasMounted, setHasMounted] = useState(false)
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false)
 
   // Avoid hydration mismatch by only using the store auth state after mount
   const isAuthenticated = hasMounted ? storeAuth : false
@@ -40,7 +43,7 @@ export default function Header() {
     )}>
       <div className="container mx-auto px-4 min-[425px]:px-12 py-2">
 
-        <div className="flex items-center justify-between gap-6">
+        <div className="flex items-center justify-between gap-6 relative">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
@@ -105,6 +108,14 @@ export default function Header() {
               >
                 News & blogs
               </Link>
+
+              {/* Sign Up Button & Dropdown Container */}
+              <button
+                onClick={() => setIsSignUpModalOpen(!isSignUpModalOpen)}
+                className="bg-[#D4AF37] text-white text-sm px-4 py-1 rounded font-medium hover:bg-[#D4AF37]/90 transition-colors cursor-pointer"
+              >
+                Sign Up
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -117,6 +128,11 @@ export default function Header() {
             >
               {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
+
+            <SignUpDropdown
+              isOpen={isSignUpModalOpen}
+              onClose={() => setIsSignUpModalOpen(false)}
+            />
           </div>
         </div>
 
@@ -202,11 +218,21 @@ export default function Header() {
                 >
                   News
                 </Link>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    setIsSignUpModalOpen(true)
+                  }}
+                  className="text-lg font-semibold text-[#D4AF37] mt-2 text-left"
+                >
+                  Sign Up
+                </button>
               </nav>
             </div>
           </div>
         )
       }
+
     </header >
   )
 }
