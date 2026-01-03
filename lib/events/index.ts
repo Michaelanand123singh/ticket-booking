@@ -160,7 +160,8 @@ export {
 };
 
 // Re-export types for convenience
-export { SportCategory, TravelDemand, TicketDemand, SportEvent } from '@/types/events';
+export { SportCategory, TravelDemand, TicketDemand } from '@/types/events';
+export type { SportEvent } from '@/types/events';
 
 export * from './motorsports-data';
 export * from './tennis-data';

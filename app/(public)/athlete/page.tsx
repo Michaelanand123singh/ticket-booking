@@ -1,14 +1,14 @@
 'use client'
 
 import React, { useState, useEffect, Suspense, useRef } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import AthleteSelection from '@/components/home/AthleteSelection'
 import RecreationalEvents from '@/components/athlete/RecreationalEvents'
-import ProfessionalEvents from '@/components/athlete/ProfessionalEvents'
 import EnquiryCTA from '@/components/shared/EnquiryCTA'
 
 function AtheletesContent() {
     const searchParams = useSearchParams()
+    const router = useRouter()
     const typeParam = searchParams.get('type')
     const [activeTab, setActiveTab] = useState<'professional' | 'recreational'>('professional');
     const contentRef = useRef<HTMLDivElement>(null);
@@ -20,10 +20,15 @@ function AtheletesContent() {
     }, [typeParam])
 
     const handleTypeSelect = (type: 'professional' | 'recreational') => {
-        setActiveTab(type);
-        setTimeout(() => {
-            contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
+        if (type === 'professional') {
+            // Redirect to the dedicated professional page
+            router.push('/athlete/professional');
+        } else {
+            setActiveTab(type);
+            setTimeout(() => {
+                contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
     };
 
     return (
@@ -39,17 +44,13 @@ function AtheletesContent() {
                 ref={contentRef}
                 className="mb-0 mt-24 md:mt-12 relative z-0 pointer-events-auto scroll-mt-32"
             >
-                {activeTab === 'professional' ? (
-                    <ProfessionalEvents />
-                ) : (
-                    <RecreationalEvents />
-                )}
+                <RecreationalEvents />
             </div>
 
             <EnquiryCTA
-                title={activeTab === 'professional' ? "Elite logistics for elite performance." : "Train like a pro, play like a legend."}
-                description={activeTab === 'professional' ? "Focus on the game. We handle the travel, accommodation, and improved logistics." : "Exclusive training camps and recreational tournaments tailored for you."}
-                link={activeTab === 'professional' ? "/enquiry/athlete-professional" : "/enquiry/athlete-recreational"}
+                title="Train like a pro, play like a legend."
+                description="Exclusive training camps and recreational tournaments tailored for you."
+                link="/enquiry/athlete-recreational"
                 buttonLabel="Enquire Now"
             />
         </div>
