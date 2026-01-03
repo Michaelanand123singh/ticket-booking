@@ -1,6 +1,3 @@
-import React from 'react'
-import { Calendar } from 'lucide-react'
-
 interface SportEventCardProps {
     title: string
     date: { day: string, month: string }

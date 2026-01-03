@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { gsap } from "gsap";
 import AnimatedContent from "@/components/home/AnimatedContent";
-import ProfessionalEvents from "@/components/athlete/ProfessionalEvents";
+import ExperienceSports from "@/components/experiences/ExperienceSports";
 import EnquiryCTA from "@/components/shared/EnquiryCTA";
 import { TrendingTournamentsCarousel } from "@/components/home/TrendingTournaments";
 
@@ -172,7 +172,7 @@ export default function ExperiencesPage() {
                     </h2>
                 </AnimatedContent>
 
-                <ProfessionalEvents />
+                <ExperienceSports />
             </section>
 
             <EnquiryCTA
