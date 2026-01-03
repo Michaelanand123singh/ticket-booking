@@ -74,17 +74,14 @@ export default function Header() {
                     <Link href="/experiences/football" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
                       Football
                     </Link>
-                    <Link href="/experiences/cricket" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
-                      Cricket
-                    </Link>
                     <Link href="/experiences/tennis" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
                       Tennis
                     </Link>
-                    <Link href="/experiences/basketball" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
-                      Basketball
+                    <Link href="/experiences/f1" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
+                      F1/Motorsport
                     </Link>
-                    <Link href="/experiences/rugby" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
-                      Rugby
+                    <Link href="/experiences/cricket" className="px-4 py-2 text-sm text-gray-300 hover:text-[#D4AF37] hover:bg-white/5 transition-colors">
+                      Cricket
                     </Link>
                   </div>
                 </div>
@@ -189,13 +186,6 @@ export default function Header() {
                       Football
                     </Link>
                     <Link
-                      href="/experiences/cricket"
-                      className="text-sm text-gray-300 hover:text-[#D4AF37]"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Cricket
-                    </Link>
-                    <Link
                       href="/experiences/tennis"
                       className="text-sm text-gray-300 hover:text-[#D4AF37]"
                       onClick={() => setMobileMenuOpen(false)}
@@ -203,18 +193,18 @@ export default function Header() {
                       Tennis
                     </Link>
                     <Link
-                      href="/experiences/basketball"
+                      href="/experiences/f1"
                       className="text-sm text-gray-300 hover:text-[#D4AF37]"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Basketball
+                      F1/Motorsport
                     </Link>
                     <Link
-                      href="/experiences/rugby"
+                      href="/experiences/cricket"
                       className="text-sm text-gray-300 hover:text-[#D4AF37]"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Rugby
+                      Cricket
                     </Link>
                   </div>
                 </div>

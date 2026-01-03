@@ -1,6 +1,6 @@
 import SportHero from '@/components/experiences/SportHero'
 import SportEventCard from '@/components/experiences/SportEventCard'
-import TrendingTournamentsCarousel from '@/components/home/TrendingTournamentsCarousel'
+import { TrendingTournamentsCarousel } from '@/components/home/TrendingTournaments'
 import Link from 'next/link'
 import AnimatedContent from '@/components/home/AnimatedContent'
 
@@ -135,11 +135,46 @@ export default async function SportPage({ params }: { params: Promise<{ sport: s
                         delay={0.3}
                     >
                         <TrendingTournamentsCarousel items={[
-                            { name: `Global ${sport} Cup`, src: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&q=80&w=800", link: `/experiences/${sport}/global-cup` },
-                            { name: `National ${sport} League`, src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800", link: `/experiences/${sport}/national-league` },
-                            { name: `${sport} World Championship`, src: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?auto=format&fit=crop&q=80&w=800", link: `/experiences/${sport}/world-championship` },
-                            { name: `Regional ${sport} Finals`, src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=800", link: `/experiences/${sport}/regional-finals` },
-                            { name: `Pro ${sport} Series`, src: "https://images.unsplash.com/photo-1624880357913-a8539238245b?auto=format&fit=crop&q=80&w=800", link: `/experiences/${sport}/pro-series` },
+                            {
+                                name: `Global ${sport} Cup`,
+                                src: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&q=80&w=800",
+                                link: `/experiences/${sport}/global-cup`,
+                                dateRange: "Coming Soon",
+                                location: "International",
+                                tagline: "The world's stage awaits."
+                            },
+                            {
+                                name: `National ${sport} League`,
+                                src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800",
+                                link: `/experiences/${sport}/national-league`,
+                                dateRange: "Season 2026",
+                                location: "Nationwide",
+                                tagline: "Defend your home turf."
+                            },
+                            {
+                                name: `${sport} World Championship`,
+                                src: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?auto=format&fit=crop&q=80&w=800",
+                                link: `/experiences/${sport}/world-championship`,
+                                dateRange: "TBA 2026",
+                                location: "Global",
+                                tagline: "The ultimate prize."
+                            },
+                            {
+                                name: `Regional ${sport} Finals`,
+                                src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=800",
+                                link: `/experiences/${sport}/regional-finals`,
+                                dateRange: "Quarter 3 2026",
+                                location: "Regional",
+                                tagline: "Local value, global spirit."
+                            },
+                            {
+                                name: `Pro ${sport} Series`,
+                                src: "https://images.unsplash.com/photo-1624880357913-a8539238245b?auto=format&fit=crop&q=80&w=800",
+                                link: `/experiences/${sport}/pro-series`,
+                                dateRange: "Monthly Events",
+                                location: "Various Locations",
+                                tagline: "Professional excellence."
+                            },
                         ]} />
                     </AnimatedContent>
                 </div>

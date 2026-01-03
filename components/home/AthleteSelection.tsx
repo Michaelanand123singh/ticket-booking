@@ -28,7 +28,7 @@ export default function AthleteSelection({ activeType, variant = 'default', show
                         <Image
                             src={type === 'professional'
                                 ? "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1000&auto=format&fit=crop"
-                                : "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop"
+                                : "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&q=80&w=1000" // Marathon (Matches Home Page)
                             }
                             alt={`${type === 'professional' ? 'Professional' : 'Recreational'} Athlete`}
                             fill

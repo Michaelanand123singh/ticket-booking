@@ -28,7 +28,7 @@ export default function EnquiryCTA({ title, description, link, buttonLabel }: En
 
                         <Link
                             href={link}
-                            className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-white font-medium text-lg px-8 py-3 rounded transition-colors whitespace-nowrap"
+                            className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-black font-medium text-lg px-8 py-3 rounded transition-colors whitespace-nowrap"
                         >
                             {buttonLabel}
                         </Link>

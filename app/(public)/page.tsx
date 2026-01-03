@@ -4,7 +4,7 @@ import WhatWeOffer from '@/components/home/WhatWeOffer'
 import NewsSection from '@/components/home/NewsSection'
 import TrendingTournaments from '@/components/home/TrendingTournaments'
 import TestimonialSection from '@/components/home/TestimonialSection'
-import AthleteSelection from '@/components/home/AthleteSelection'
+import AthleteDisplaySection from '@/components/home/AthleteDisplaySection'
 
 import MainJourneyLine from '@/components/home/MainJourneyLine'
 import EnquiryCTA from '@/components/shared/EnquiryCTA'
@@ -15,7 +15,7 @@ export default function Home() {
       <MainJourneyLine />
       <Hero />
       <TrendingTournaments />
-      <AthleteSelection />
+      <AthleteDisplaySection />
       <WhatWeOffer />
       <TestimonialSection />
       <NewsSection />

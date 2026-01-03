@@ -3,13 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
-import { Carousel } from "@ark-ui/react/carousel";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { gsap } from "gsap";
 import AnimatedContent from "@/components/home/AnimatedContent";
 import ProfessionalEvents from "@/components/athlete/ProfessionalEvents";
 import EnquiryCTA from "@/components/shared/EnquiryCTA";
+import { TrendingTournamentsCarousel } from "@/components/home/TrendingTournaments";
 
 /* ===================== DATA ===================== */
 
@@ -17,27 +17,42 @@ const trendingTournaments = [
     {
         src: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1000&auto=format&fit=crop",
         name: "Champions League Final 2024",
-        link: "/experiences/football/champions-league"
+        link: "/experiences/football/champions-league",
+        dateRange: "June 1, 2024",
+        location: "London, UK",
+        tagline: "The best of European football."
     },
     {
         src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1000&auto=format&fit=crop",
         name: "Wimbledon Championship",
-        link: "/experiences/tennis/wimbledon"
+        link: "/experiences/tennis/wimbledon",
+        dateRange: "July 1 – 14, 2024",
+        location: "London, UK",
+        tagline: "Tradition, grass, and glory."
     },
     {
         src: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=1000&auto=format&fit=crop",
         name: "Qatar World Cup",
-        link: "/experiences/football/world-cup"
+        link: "/experiences/football/world-cup",
+        dateRange: "Past Event",
+        location: "Qatar",
+        tagline: "The world united by football."
     },
     {
         src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=1000&auto=format&fit=crop",
         name: "Super Bowl LVIII",
-        link: "/experiences/rugby/super-bowl"
+        link: "/experiences/rugby/super-bowl",
+        dateRange: "February 11, 2024",
+        location: "Las Vegas, USA",
+        tagline: "The biggest show in sports."
     },
     {
         src: "https://images.unsplash.com/photo-1624880357913-a8539238245b?q=80&w=1000&auto=format&fit=crop",
         name: "NBA Finals",
-        link: "/experiences/basketball/nba-finals"
+        link: "/experiences/basketball/nba-finals",
+        dateRange: "June 2024",
+        location: "USA",
+        tagline: "Where legends are made."
     },
 ];
 
@@ -63,14 +78,14 @@ export default function ExperiencesPage() {
         setOffset((p) => (dir === "left" ? Math.max(0, p - step) : Math.min(max, p + step)));
     };
 
-    /* --- Trending carousel autoplay --- */
-    const [currentIndex, setCurrentIndex] = useState(0);
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % trendingTournaments.length);
-        }, 4000);
-        return () => clearInterval(timer);
-    }, []);
+    /* --- Trending carousel autoplay (Managed by Component now) --- */
+    // const [currentIndex, setCurrentIndex] = useState(0);
+    // useEffect(() => {
+    //     const timer = setInterval(() => {
+    //         setCurrentIndex((prev) => (prev + 1) % trendingTournaments.length);
+    //     }, 4000);
+    //     return () => clearInterval(timer);
+    // }, []);
 
     /* --- Hero Animation --- */
     const heroTextRef = useRef<HTMLParagraphElement>(null);
@@ -137,42 +152,9 @@ export default function ExperiencesPage() {
                     ease="power3.out"
                     delay={0.3}
                 >
-                    <Carousel.Root
-                        page={currentIndex}
-                        onPageChange={(d: any) => setCurrentIndex(d.page)}
-                        slideCount={trendingTournaments.length}
-                        loop
-                        className="w-full"
-                    >
-                        <Carousel.ItemGroup className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
-                            {trendingTournaments.map((item, index) => (
-                                <Carousel.Item key={index} index={index}>
-                                    <Link href={item.link} className="block relative w-full h-[420px] sm:h-[520px] lg:h-[620px]">
-                                        <img
-                                            src={item.src}
-                                            alt={item.name}
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-8">
-                                            <h3 className="text-2xl md:text-4xl font-normal">
-                                                {item.name}
-                                            </h3>
-                                        </div>
-                                    </Link>
-                                </Carousel.Item>
-                            ))}
-                        </Carousel.ItemGroup>
-
-                        <Carousel.IndicatorGroup className="flex justify-center gap-2 mt-4">
-                            {trendingTournaments.map((_, i) => (
-                                <Carousel.Indicator
-                                    key={i}
-                                    index={i}
-                                    className="w-2 h-2 rounded-full bg-gray-500 data-current:bg-white"
-                                />
-                            ))}
-                        </Carousel.IndicatorGroup>
-                    </Carousel.Root>
+                    <div className="w-full">
+                        <TrendingTournamentsCarousel items={trendingTournaments} />
+                    </div>
                 </AnimatedContent>
             </section>
 
