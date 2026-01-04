@@ -1,5 +1,5 @@
-import { Calendar, MapPin } from 'lucide-react'
 import Itinerary from '@/components/athlete/Itinerary'
+import Link from 'next/link'
 
 // Mock data generator for the match
 const getMatchData = (sport: string, tournament: string, matchId: string) => {
@@ -19,6 +19,7 @@ const getMatchData = (sport: string, tournament: string, matchId: string) => {
             description: "Experience the electrifying clash between the Thunder Strikers and the Eagle Warriors. Both teams are at the peak of their form, promising an unforgettable showdown filled with intense action and strategic plays.",
             price: 150,
             heroImage: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80&w=1920",
+            logo: "/images/logo.png",
         },
         {
             id: "match-2",
@@ -64,6 +65,7 @@ const getMatchData = (sport: string, tournament: string, matchId: string) => {
         ...matchData,
         // Ensure some fields are always present if mock data changes
         heroImage: matchData.heroImage || "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80&w=1920",
+        logo: (matchData as any).logo || "/images/logo.png",
         location: matchData.venue,
         itinerary: [
             {
@@ -113,10 +115,12 @@ export default async function MatchPage({ params }: { params: Promise<{ sport: s
 
                         {/* Circular Logo */}
                         <div className="flex-shrink-0">
-                            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white flex items-center justify-center p-2 shadow-lg">
-                                <div className="text-center text-xs text-black font-semibold leading-tight">
-                                    VS
-                                </div>
+                            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white flex items-center justify-center p-2 shadow-lg overflow-hidden">
+                                <img
+                                    src={data.logo}
+                                    alt="Event Logo"
+                                    className="w-full h-full object-contain"
+                                />
                             </div>
                         </div>
 
@@ -164,16 +168,15 @@ export default async function MatchPage({ params }: { params: Promise<{ sport: s
 
                         {/* Right Column: CTA */}
                         <div className="lg:w-1/3 flex flex-col justify-center items-start lg:items-end lg:text-right mt-8 lg:mt-0">
-                            <p className="text-xl md:text-2xl text-white font-normal mb-4">
-                                From {data.price} $ .
-                            </p>
-
-                            <button className="bg-[#D4AF37] hover:bg-[#b5952f] text-black font-semibold text-lg px-8 py-3 rounded-lg w-full md:w-auto transition-colors shadow-lg">
-                                Buy Tickets
-                            </button>
+                            <Link
+                                href="/enquiry/home"
+                                className="bg-[#D4AF37] hover:bg-[#b5952f] text-black font-semibold text-lg px-8 py-3 rounded-lg w-full md:w-auto transition-colors shadow-lg inline-block text-center"
+                            >
+                                Enquire Now
+                            </Link>
 
                             <p className="text-gray-500 text-xs mt-4">
-                                Get your tickets 1 - 3 days before event.
+                                Contact us for exclusive access.
                             </p>
                         </div>
 
