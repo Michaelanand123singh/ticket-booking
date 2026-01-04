@@ -64,7 +64,7 @@ export default function SportHero({ sport, description, heroImage, cardImage }: 
 
                     {/* Text Content */}
                     <div className="flex-grow text-center md:text-left">
-                        <h1 ref={titleRef} className="text-2xl md:text-4xl font-normal capitalize tracking-tighter mb-6 relative z-10 w-full break-words leading-[0.9]">
+                        <h1 ref={titleRef} className="text-2xl md:text-4xl font-normal capitalize tracking-tighter mb-6 relative z-10 w-full break-words leading-[0.9] font-serif">
                             <span>
                                 {sport}
                             </span>

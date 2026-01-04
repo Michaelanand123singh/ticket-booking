@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins, Libre_Baskerville } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
 import Toaster from "@/components/ui/Toaster";
 import AuthGuard from "@/components/shared/AuthGuard";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+    variable: "--font-poppins",
+});
+
+const libreBaskerville = Libre_Baskerville({
+    weight: ["400", "700"],
+    subsets: ["latin"],
+    variable: "--font-libre-baskerville",
+});
 
 export const metadata: Metadata = {
     title: "Admin Dashboard",
@@ -20,7 +30,7 @@ export default function AdminLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`${inter.className} min-h-screen bg-[#11212D] text-white`}>
+            <body className={`${poppins.variable} font-sans ${libreBaskerville.variable} min-h-screen bg-[#11212D] text-white`}>
                 {/* <AuthGuard>
                 </AuthGuard> */}
                 <Header />

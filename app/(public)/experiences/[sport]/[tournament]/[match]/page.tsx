@@ -93,7 +93,7 @@ export default async function MatchPage({ params }: { params: Promise<{ sport: s
     const data = getMatchData(sport, tournament, match)
 
     return (
-        <div className="min-h-screen bg-black text-white relative font-sans">
+        <div className="min-h-screen bg-black text-white relative">
 
             {/* Custom Hero Section */}
             <div className="relative w-full h-[60vh] min-h-[500px] flex items-end">
@@ -126,7 +126,7 @@ export default async function MatchPage({ params }: { params: Promise<{ sport: s
 
                         {/* Text Info */}
                         <div className="flex-grow mb-2 md:mb-0">
-                            <h1 className="text-3xl md:text-5xl font-bold text-white mb-2">
+                            <h1 className="text-3xl md:text-5xl font-bold text-white mb-2 font-serif">
                                 {data.title}
                             </h1>
 
@@ -154,7 +154,7 @@ export default async function MatchPage({ params }: { params: Promise<{ sport: s
 
                         {/* Left Column: Description */}
                         <div className="lg:w-2/3">
-                            <h2 className="text-2xl sm:text-4xl font-normal text-white mb-2">
+                            <h2 className="text-2xl sm:text-4xl font-normal text-white mb-2 font-serif">
                                 {data.title}
                             </h2>
                             <p className="text-gray-400 mb-8 text-sm">
